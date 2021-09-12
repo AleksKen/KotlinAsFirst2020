@@ -200,14 +200,14 @@ fun triangleKind(a: Double, b: Double, c: Double): Int  {
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     var ans = -1
-    var len = max(b,d)+ 5
-    var s1  = Array(len, {i -> 0})
+    var len = max(b, d)
+    var s1  = Array(len+1, {i -> 0})
     for (i in a..b)
         s1[i] = 1
-    var s2  = Array(len, {i -> 0})
+    var s2  = Array(len+1, {i -> 0})
     for (i in c..d)
         s2[i] = 1
-    for (i in 0..s1.size-1)
+    for (i in 0..len)
         if ((s1[i]==s2[i]) and (s1[i]==1))
             ans+=1
     return ans
