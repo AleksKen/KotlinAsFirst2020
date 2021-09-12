@@ -201,10 +201,10 @@ fun triangleKind(a: Double, b: Double, c: Double): Int  {
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     var ans = -1
     val len = max(b, d)
-    val s1  = Array(len+1, {i -> 0})
+    val s1  = Array(len+1, {e -> 0})
     for (i in a..b)
         s1[i] = 1
-    val s2  = Array(len+1, {i -> 0})
+    val s2  = Array(len+1, {e -> 0})
     for (i in c..d)
         s2[i] = 1
     for (i in 0..len)
