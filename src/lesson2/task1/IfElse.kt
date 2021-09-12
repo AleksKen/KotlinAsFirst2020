@@ -174,7 +174,7 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int  {
-    var a = mutableListOf(a, b, c)
+    val a = mutableListOf(a, b, c)
     a.sort()
     var ans: Int = 2
     if ((a[0]+a[1]<a[2]) or (a[1]+a[2]<a[0]) or (a[0]+a[2]<a[1]))
@@ -200,11 +200,11 @@ fun triangleKind(a: Double, b: Double, c: Double): Int  {
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     var ans = -1
-    var len = max(b, d)
-    var s1  = Array(len+1, {i -> 0})
+    val len = max(b, d)
+    val s1  = Array(len+1, {i -> 0})
     for (i in a..b)
         s1[i] = 1
-    var s2  = Array(len+1, {i -> 0})
+    val s2  = Array(len+1, {i -> 0})
     for (i in c..d)
         s2[i] = 1
     for (i in 0..len)
