@@ -206,7 +206,7 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     var s2  = Array(100000, {i -> 0})
     for (i in c..d)
         s2[i] = 1
-    for (i in 0..s1.size)
+    for (i in 0..(s1.count()-1))
         if ((s1[i]==s2[i]) and (s1[i]==1))
             ans+=1
     return ans
