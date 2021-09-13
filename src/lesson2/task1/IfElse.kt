@@ -208,7 +208,7 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
         s2.add(i.toString())
     for (i in 0..s1.size-1)
         for (j in 0..s2.size-1)
-            if (s1[i]==s2[j])
+            if (s1[i].toInt()==s2[j].toInt())
                 ans+=1
     return ans}
 
