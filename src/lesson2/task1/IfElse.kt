@@ -200,25 +200,15 @@ fun triangleKind(a: Double, b: Double, c: Double): Int  {
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     var ans = -1
-    val len = max(max(b, d), max(a, c))
-    val min_len = min(min(b, d), min(a, c))
-    if (len>0){
-        var s1  = Array(len+1, {e -> 0})
-        if (b>a)
-            for (i in a..b)
-                s1[i] = 1
-        var s2  = Array(len+1, {e -> 0})
-        if (d>c)
-            for (i in c..d)
-                s2[i] = 1
-        if (b==c)
-            ans = 0
-        else
-            for (i in min_len..len)
-                if ((s1[i]==s2[i]) and (s1[i]==1))
-                    ans+=1}
-    else
-        if ((b==c) or (a==d))
-            ans = 0
-    return ans }
+    var s1: MutableList<String> = mutableListOf()
+    var s2: MutableList<String> = mutableListOf()
+    for (i in a..b)
+        s1.add(i.toString())
+    for (i in c..d)
+        s2.add(i.toString())
+    for (i in 0..s1.size-1)
+        for (j in 0..s2.size-1)
+            if (s1[i]==s2[j])
+                ans+=1
+    return ans}
 
