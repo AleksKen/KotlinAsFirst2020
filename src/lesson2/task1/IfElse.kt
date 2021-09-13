@@ -200,15 +200,15 @@ fun triangleKind(a: Double, b: Double, c: Double): Int  {
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     var ans = -1
-    var s1: MutableList<String> = mutableListOf()
-    var s2: MutableList<String> = mutableListOf()
+    var s1: MutableList<Int> = mutableListOf()
+    var s2: MutableList<Int> = mutableListOf()
     for (i in a..b)
-        s1.add(i.toString())
+        s1.add(i)
     for (i in c..d)
-        s2.add(i.toString())
-    for (i in 0..s1.size-2)
-        for (j in 0..s2.size-1)
-            if (s1[i].toInt()==s2[j].toInt())
-                ans+=1
+        s2.add(i)
+    s1.addAll(s2)
+    val set = s1.toSet().toList()
+    if (set.size != s1.size)
+        ans += s1.size-set.size
     return ans}
 
