@@ -2,7 +2,8 @@
 
 package lesson1.task1
 
-import kotlin.math.*
+import kotlin.math.PI
+import kotlin.math.sqrt
 
 // Урок 1: простые функции
 // Максимальное количество баллов = 5
@@ -75,7 +76,7 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int = hours * 60 * 60 + min
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
 fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double =
-    (sagenes * 3 * 16  + arshins * 16 + vershoks ) *4.445/ 100.0
+    (sagenes * 3 * 16 + arshins * 16 + vershoks ) * 4.445 / 100.0
 
 /**
  * Тривиальная (1 балл)
@@ -108,12 +109,9 @@ fun thirdDigit(number: Int): Int = (number / 100) % 10
  * прибыл на станцию назначения в h2 часов m2 минут того же дня (например в 13:01).
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
-fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int {
-    val min:Int = 60+minutesArrive-minutesDepart
-    val hours: Int = hoursArrive-1-hoursDepart
-    val ans:Int = min + hours*60
-    return ans
-}
+fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int) = (hoursArrive -
+        hoursDepart) * 60 - minutesDepart + minutesArrive
+
 
 /**
  * Простая (2 балла)
@@ -123,8 +121,8 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
 fun accountInThreeYears(initial: Int, percent: Int): Double {
-    val k:Double = (100.0+percent)/100.0
-    val ans:Double = initial.toDouble()*k*k*k
+    val k: Double = (100.0 + percent) / 100.0
+    val ans: Double = initial.toDouble() * k * k * k
     return ans
 }
 
@@ -135,7 +133,11 @@ fun accountInThreeYears(initial: Int, percent: Int): Double {
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
 fun numberRevert(number: Int): Int {
-    val Str: String = number.toString().reversed()
-    val ans: Int = Str.toInt()
-    return ans
-}
+    var old_num: Int = number
+    var new_num: Int = number % 10
+    repeat (2) {
+        old_num /= 10
+        new_num = (new_num * 10) + (old_num % 10)
+    }
+    return new_num }
+

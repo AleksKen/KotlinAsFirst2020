@@ -72,13 +72,12 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 fun ageDescription(age: Int): String {
     var ans: String =""
-    if ((age % 10 > 4) or (age % 10 == 0) or ((age % 100>10) and (age % 100<20)))
-        ans = age.toString()+" лет"
+    if ((age % 10 > 4) or (age % 10 == 0) or ((age % 100 > 10) and (age % 100 < 20)))
+        ans = age.toString() + " лет"
+    else if (age % 10 == 1)
+        ans = age.toString() + " год"
     else
-        if (age % 10 == 1)
-        ans = age.toString()+" год"
-        else
-            ans = age.toString()+" года"
+        ans = age.toString() + " года"
     return ans
 }
 
@@ -95,16 +94,16 @@ fun timeForHalfWay(
     t3: Double, v3: Double
 ): Double {
     val a = listOf(Pair(v1, t1), Pair(v2, t2), Pair(v3, t3))
-    var  way_half: Double = (v1*t1+v2*t2+v3*t3)/2
+    var way_half: Double = (v1 * t1 + v2 * t2 + v3 * t3) / 2
     var i: Int = 0
     var ans: Double = 0.0
-    while (way_half>0)
-        if ((way_half-(a[i].first*a[i].second))>0) {
-        ans += a[i].second
-        way_half-=(a[i].first*a[i].second)
-        i+=1}
+    while (way_half > 0)
+        if ((way_half - (a[i].first * a[i].second)) > 0) {
+            ans += a[i].second
+            way_half -= (a[i].first * a[i].second)
+            i += 1 }
         else {
-            ans += (way_half/a[i].first)
+            ans += (way_half / a[i].first)
             way_half = 0.0 }
     return ans
 }
@@ -124,25 +123,25 @@ fun whichRookThreatens(
     rookX2: Int, rookY2: Int
 ): Int {
     var ans: Int = 0
-    var R1:Int=0
-    var R2:Int=0
+    var r1:Int=0
+    var r2:Int=0
     for ( x in 1..8) {
-        if ((x==kingX) and (rookY1==kingY))
-            R1 = 1
-        if ((x==kingX) and (rookY2==kingY))
-            R2 = 1}
-    for ( y in 1..8){
-        if ((y==kingY) and (rookX1==kingX))
-            R1 = 1
-        if ((y==kingY) and (rookX2==kingX))
-            R2 = 1}
-    if ((R1==1) and (R2==1))
+        if ((x == kingX) and (rookY1 == kingY))
+            r1 = 1
+        if ((x == kingX) and (rookY2 == kingY))
+            r2 = 1 }
+    for ( y in 1..8) {
+        if ((y == kingY) and (rookX1 == kingX))
+            r1 = 1
+        if ((y == kingY) and (rookX2 == kingX))
+            r2 = 1 }
+    if ((r1 == 1) and (r2 == 1))
         ans = 3
     else
-        if ((R1==0) and (R2==0))
+        if ((r1 == 0) and (r2 == 0))
             ans = 0
         else
-            if ((R1==0) and (R2==1))
+            if ((r1 == 0) and (r2 == 1))
                 ans = 2
             else
                 ans = 1
@@ -177,7 +176,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int  {
     val a = mutableListOf(a, b, c)
     a.sort()
     var ans: Int = 2
-    if ((a[0]+a[1]<a[2]) or (a[1]+a[2]<a[0]) or (a[0]+a[2]<a[1]))
+    if ((a[0] + a[1] < a[2]) or (a[1] + a[2] < a[0]) or (a[0] + a[2] < a[1]))
         ans = -1
     else
         if ((sqr(a[0]) + sqr(a[1])) == sqr(a[2]))
@@ -209,6 +208,6 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     s1.addAll(s2)
     val set = s1.toSet().toList()
     if (set.size != s1.size)
-        ans += s1.size-set.size
+        ans += s1.size - set.size
     return ans}
 
