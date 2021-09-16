@@ -76,7 +76,7 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int = hours * 60 * 60 + min
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
 fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double =
-    (sagenes * 3 * 16 + arshins * 16 + vershoks ) * 4.445 / 100.0
+    (sagenes * 3 * 16 + arshins * 16 + vershoks) * 4.445 / 100.0
 
 /**
  * Тривиальная (1 балл)
@@ -135,9 +135,10 @@ fun accountInThreeYears(initial: Int, percent: Int): Double {
 fun numberRevert(number: Int): Int {
     var old_num: Int = number
     var new_num: Int = number % 10
-    repeat (2) {
+    repeat(2) {
         old_num /= 10
         new_num = (new_num * 10) + (old_num % 10)
     }
-    return new_num }
+    return new_num
+}
 

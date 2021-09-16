@@ -71,7 +71,7 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String {
-    var ans: String =""
+    var ans: String = ""
     if ((age % 10 > 4) or (age % 10 == 0) or ((age % 100 > 10) and (age % 100 < 20)))
         ans = age.toString() + " лет"
     else if (age % 10 == 1)
@@ -94,17 +94,18 @@ fun timeForHalfWay(
     t3: Double, v3: Double
 ): Double {
     val a = listOf(Pair(v1, t1), Pair(v2, t2), Pair(v3, t3))
-    var way_half: Double = (v1 * t1 + v2 * t2 + v3 * t3) / 2
+    var wayHalf: Double = (v1 * t1 + v2 * t2 + v3 * t3) / 2
     var i: Int = 0
     var ans: Double = 0.0
-    while (way_half > 0)
-        if ((way_half - (a[i].first * a[i].second)) > 0) {
+    while (wayHalf > 0)
+        if ((wayHalf - (a[i].first * a[i].second)) > 0) {
             ans += a[i].second
-            way_half -= (a[i].first * a[i].second)
-            i += 1 }
-        else {
-            ans += (way_half / a[i].first)
-            way_half = 0.0 }
+            wayHalf -= (a[i].first * a[i].second)
+            i += 1
+        } else {
+            ans += (wayHalf / a[i].first)
+            wayHalf = 0.0
+        }
     return ans
 }
 
@@ -123,28 +124,12 @@ fun whichRookThreatens(
     rookX2: Int, rookY2: Int
 ): Int {
     var ans: Int = 0
-    var r1:Int=0
-    var r2:Int=0
-    for ( x in 1..8) {
-        if ((x == kingX) and (rookY1 == kingY))
-            r1 = 1
-        if ((x == kingX) and (rookY2 == kingY))
-            r2 = 1 }
-    for ( y in 1..8) {
-        if ((y == kingY) and (rookX1 == kingX))
-            r1 = 1
-        if ((y == kingY) and (rookX2 == kingX))
-            r2 = 1 }
-    if ((r1 == 1) and (r2 == 1))
+    if ((rookX1 == kingX) || (rookY1 == kingY))
+        ans = 1
+    if ((rookX2 == kingX) || (rookY2 == kingY))
+        ans = 2
+    if (((rookX2 == kingX) || (rookY2 == kingY)) && ((rookX1 == kingX) || (rookY1 == kingY)))
         ans = 3
-    else
-        if ((r1 == 0) and (r2 == 0))
-            ans = 0
-        else
-            if ((r1 == 0) and (r2 == 1))
-                ans = 2
-            else
-                ans = 1
     return ans
 }
 
@@ -172,11 +157,11 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int  {
+fun triangleKind(a: Double, b: Double, c: Double): Int {
     val a = mutableListOf(a, b, c)
     a.sort()
     var ans: Int = 2
-    if ((a[0] + a[1] < a[2]) or (a[1] + a[2] < a[0]) or (a[0] + a[2] < a[1]))
+    if ((a[0] + a[1] < a[2]) || (a[1] + a[2] < a[0]) || (a[0] + a[2] < a[1]))
         ans = -1
     else
         if ((sqr(a[0]) + sqr(a[1])) == sqr(a[2]))
@@ -199,15 +184,40 @@ fun triangleKind(a: Double, b: Double, c: Double): Int  {
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     var ans = -1
-    var s1: MutableList<Int> = mutableListOf()
-    var s2: MutableList<Int> = mutableListOf()
-    for (i in a..b)
-        s1.add(i)
-    for (i in c..d)
-        s2.add(i)
-    s1.addAll(s2)
-    val set = s1.toSet().toList()
-    if (set.size != s1.size)
-        ans += s1.size - set.size
-    return ans}
+    if ((b == c) || (d == a))
+        ans = 0
+    else {
+        if (((b < c) && (a < c)) || ((c < a) && (d < a)))
+            ans = -1
+        else {
+            if ((b < d) && (a < c))
+                ans = b - c
+            if ((d < b) && (c < a))
+                ans = d - a
+            if ((c > a) && (d > a) && (c < b) && (d < b))
+                ans = d - c
+            if ((c < a) && (b > c) && (a < d) && (b < d))
+                ans = b - a
+        }
+    }
+    return ans
+}
+
+
+/**fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
+var ans = -1
+var s1: MutableList<Int> = mutableListOf()
+var s2: MutableList<Int> = mutableListOf()
+for (i in a..b)
+s1.add(i)
+for (i in c..d)
+s2.add(i)
+s1.addAll(s2)
+val set = s1.toSet().toList()
+if (set.size != s1.size)
+ans += s1.size - set.size
+return ans
+}*/
+
+
 
