@@ -26,7 +26,8 @@ fun isNumberHappy(number: Int): Boolean {
     val digit4 = number % 10
     if (digit1 + digit2 == digit3 + digit4)
         ans = true
-    return ans }
+    return ans
+}
 
 /**
  * Простая (2 балла)
@@ -67,4 +68,18 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
+    var ans = false
+    var countR = 0
+    var countS = 0
+    val side = mutableListOf<Int>(a, b, c)
+    for (i in 0..2) {
+        if (side[i] <= r)
+            countR += 1
+        if (side[i] <= s)
+            countS += 1
+    }
+    if (((countR > 1) && (countS > 1)) || ((countR == 1) && (countS > 1)) || ((countR > 1) && (countS == 1)))
+        ans = true
+    return ans
+}
