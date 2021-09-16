@@ -194,9 +194,9 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
                 ans = b - c
             if ((d < b) && (c < a))
                 ans = d - a
-            if ((c > a) && (d > a) && (c < b) && (d < b))
+            if ((c >= a) && (d >= a) && (c <= b) && (d <= b))
                 ans = d - c
-            if ((c < a) && (b > c) && (a < d) && (b < d))
+            if ((c <= a) && (b >= c) && (a <= d) && (b <= d))
                 ans = b - a
         }
     }
