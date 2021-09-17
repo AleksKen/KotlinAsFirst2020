@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import lesson1.task1.sqr
 import java.math.BigInteger
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -199,7 +200,34 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var k = 2
+    var numAns = 0
+    val squar = mutableListOf<Int>(1, 4)
+    if (n > 2) {
+        for (i in 2..n) {
+            squar.add(sqr(i + 1))
+            var num = squar[i]
+            var countDig = 0
+            while (num > 0) {
+                countDig += 1
+                num /= 10
+            }
+            k += countDig
+            if (k >= n) {
+                numAns = squar[i]
+                break
+            }
+        }
+        var ans: Double = 0.0
+        if (k - n == 0)
+            ans = (numAns % 10).toDouble()
+        else
+            ans = (numAns / 10.0.pow(k - n)) % 10
+        return ans.toInt()
+    } else
+        return squar[n - 1]
+}
 
 /**
  * Сложная (5 баллов)
