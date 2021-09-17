@@ -2,6 +2,8 @@
 
 package lesson3.task1
 
+import java.math.BigInteger
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -80,7 +82,12 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    val fibNums = mutableListOf<Int>(1, 1)
+    for (i in 2..n)
+        fibNums.add(fibNums[i - 1] + fibNums[i - 2])
+    return fibNums[n - 1]
+}
 
 /**
  * Простая (2 балла)
@@ -203,4 +210,40 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var k = 2
+    var numAns = 0
+    val fibNums = mutableListOf<Int>(1, 1)
+    if (n > 2) {
+        for (i in 2..n) {
+            fibNums.add(fibNums[i - 1] + fibNums[i - 2])
+            var num = fibNums[i]
+            var countDig = 0
+            while (num > 0) {
+                countDig += 1
+                num /= 10
+            }
+            k += countDig
+            if (k >= n) {
+                numAns = fibNums[i]
+                break
+            }
+        }
+        var ans: Double = 0.0
+        if (k - n == 0)
+            ans = (numAns % 10).toDouble()
+        else
+            ans = (numAns / 10.0.pow(k - n)) % 10
+        return ans.toInt()
+    } else
+        return fibNums[n - 1]
+}
+
+
+
+
+
+
+
+
+
