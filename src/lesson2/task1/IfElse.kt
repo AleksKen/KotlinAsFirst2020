@@ -73,11 +73,11 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
 fun ageDescription(age: Int): String {
     var ans: String = ""
     if ((age % 10 > 4) or (age % 10 == 0) or ((age % 100 > 10) and (age % 100 < 20)))
-        ans = age.toString() + " лет"
+        ans = "$age лет"
     else if (age % 10 == 1)
-        ans = age.toString() + " год"
+        ans = "$age год"
     else
-        ans = age.toString() + " года"
+        ans = "$age года"
     return ans
 }
 
@@ -203,21 +203,6 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     return ans
 }
 
-
-/**fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-var ans = -1
-var s1: MutableList<Int> = mutableListOf()
-var s2: MutableList<Int> = mutableListOf()
-for (i in a..b)
-s1.add(i)
-for (i in c..d)
-s2.add(i)
-s1.addAll(s2)
-val set = s1.toSet().toList()
-if (set.size != s1.size)
-ans += s1.size - set.size
-return ans
-}*/
 
 
 

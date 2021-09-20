@@ -19,14 +19,11 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
 fun isNumberHappy(number: Int): Boolean {
-    var ans: Boolean = false
     val digit1 = number / 1000
     val digit2 = number / 100 % 10
     val digit3 = number / 10 % 10
     val digit4 = number % 10
-    if (digit1 + digit2 == digit3 + digit4)
-        ans = true
-    return ans
+    return (digit1 + digit2 == digit3 + digit4)
 }
 
 /**
@@ -69,7 +66,6 @@ fun circleInside(
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
-    var ans = false
     var countR = 0
     var countS = 0
     val side = mutableListOf<Int>(a, b, c)
@@ -79,7 +75,5 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
         if (side[i] <= s)
             countS += 1
     }
-    if (((countR > 1) && (countS > 1)) || ((countR == 1) && (countS > 1)) || ((countR > 1) && (countS == 1)))
-        ans = true
-    return ans
+    return (((countR > 1) && (countS > 1)) || ((countR == 1) && (countS > 1)) || ((countR > 1) && (countS == 1)))
 }
