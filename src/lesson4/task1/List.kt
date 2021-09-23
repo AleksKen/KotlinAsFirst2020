@@ -241,7 +241,114 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun roman(n: Int): String {
+    var num = n
+    var a = arrayOfNulls<String>(1001)
+    a[1] = "I"
+    a[4] = "IV"
+    a[5] = "V"
+    a[9] = "IX"
+    a[10] = "X"
+    a[40] = "XL"
+    a[50] = "L"
+    a[90] = "XC"
+    a[100] = "C"
+    a[400] = "CD"
+    a[500] = "D"
+    a[900] = "CM"
+    a[1000] = "M"
+
+    var ans: String = ""
+    if (num >= 1000)
+        while (num >= 1000) {
+            ans += a[1000]
+            num -= 1000
+        }
+    if (num >= 100)
+        if (num - 900 >= 0) {
+            ans += a[900]
+            num -= 900
+        } else
+            if ((num / 100 == 4) || (num / 100 == 5)) {
+                if (num / 100 == 4) {
+                    ans += a[400]
+                    num -= 400
+                } else {
+                    ans += a[500]
+                    num -= 500
+                }
+            } else
+                if (num / 100 < 4)
+                    while (num >= 100) {
+                        ans += a[100]
+                        num -= 100
+                    }
+                else {
+                    ans += a[500]
+                    num -= 500
+                    while (num >= 100) {
+                        ans += a[100]
+                        num -= 100
+                    }
+                }
+
+    if (num >= 10)
+        if (num - 90 >= 0) {
+            ans += a[90]
+            num -= 90
+        } else
+            if ((num / 10 == 4) || (num / 10 == 5)) {
+                if (num / 10 == 4) {
+                    ans += a[40]
+                    num -= 40
+                } else {
+                    ans += a[50]
+                    num -= 50
+                }
+            } else
+                if (num / 10 < 4)
+                    while (num >= 10) {
+                        ans += a[10]
+                        num -= 10
+                    }
+                else {
+                    ans += a[50]
+                    num -= 50
+                    while (num >= 10) {
+                        ans += a[10]
+                        num -= 10
+                    }
+                }
+
+    if (num >= 1)
+        if (num - 9 >= 0) {
+            ans += a[9]
+            num -= 9
+        } else
+            if ((num == 4) || (num == 5)) {
+                if (num == 4) {
+                    ans += a[4]
+                    num -= 4
+                } else {
+                    ans += a[5]
+                    num -= 5
+                }
+            } else
+                if (num < 4)
+                    while (num >= 1) {
+                        ans += a[1]
+                        num -= 1
+                    }
+                else {
+                    ans += a[5]
+                    num -= 5
+                    while (num > 0) {
+                        ans += a[1]
+                        num -= 1
+                    }
+                }
+    return ans
+}
 
 /**
  * Очень сложная (7 баллов)
