@@ -264,89 +264,47 @@ fun roman(n: Int): String {
             ans += a[1000]
             num -= 1000
         }
-    if (num >= 100)
-        if (num - 900 >= 0) {
-            ans += a[900]
-            num -= 900
-        } else
-            if ((num / 100 == 4) || (num / 100 == 5)) {
-                if (num / 100 == 4) {
-                    ans += a[400]
-                    num -= 400
-                } else {
-                    ans += a[500]
-                    num -= 500
-                }
-            } else
-                if (num / 100 < 4)
-                    while (num >= 100) {
-                        ans += a[100]
-                        num -= 100
-                    }
-                else {
-                    ans += a[500]
-                    num -= 500
-                    while (num >= 100) {
-                        ans += a[100]
-                        num -= 100
-                    }
-                }
 
-    if (num >= 10)
-        if (num - 90 >= 0) {
-            ans += a[90]
-            num -= 90
-        } else
-            if ((num / 10 == 4) || (num / 10 == 5)) {
-                if (num / 10 == 4) {
-                    ans += a[40]
-                    num -= 40
-                } else {
-                    ans += a[50]
-                    num -= 50
-                }
-            } else
-                if (num / 10 < 4)
-                    while (num >= 10) {
-                        ans += a[10]
-                        num -= 10
-                    }
-                else {
-                    ans += a[50]
-                    num -= 50
-                    while (num >= 10) {
-                        ans += a[10]
-                        num -= 10
-                    }
-                }
+    var num100 = 100
+    var num900 = 900
+    var num400 = 400
+    var num500 = 500
 
-    if (num >= 1)
-        if (num - 9 >= 0) {
-            ans += a[9]
-            num -= 9
-        } else
-            if ((num == 4) || (num == 5)) {
-                if (num == 4) {
-                    ans += a[4]
-                    num -= 4
-                } else {
-                    ans += a[5]
-                    num -= 5
-                }
+    repeat(3) {
+        if (num >= num100)
+            if (num - num900 >= 0) {
+                ans += a[num900]
+                num -= num900
             } else
-                if (num < 4)
-                    while (num >= 1) {
-                        ans += a[1]
-                        num -= 1
+                if ((num / num100 == 4) || (num / num100 == 5)) {
+                    if (num / num100 == 4) {
+                        ans += a[num400]
+                        num -= num400
+                    } else {
+                        ans += a[num500]
+                        num -= num500
                     }
-                else {
-                    ans += a[5]
-                    num -= 5
-                    while (num > 0) {
-                        ans += a[1]
-                        num -= 1
+                } else
+                    if (num / num100 < 4)
+                        while (num >= num100) {
+                            ans += a[num100]
+                            num -= num100
+                        }
+                    else {
+                        ans += a[num500]
+                        num -= num500
+                        while (num >= num100) {
+                            ans += a[num100]
+                            num -= num100
+                        }
                     }
-                }
+        num100 /= 10
+        num900 /= 10
+        num400 /= 10
+        num500 /= 10
+    }
+
+
     return ans
 }
 
