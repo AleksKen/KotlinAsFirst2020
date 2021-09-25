@@ -401,7 +401,6 @@ fun russian(n: Int): String {
     else
         ans += a[doz / 10 * 10] + " " + a[doz % 10]
 
-
     var list = mutableListOf<Char>()
 
     for (i in 0..ans.lastIndex)
@@ -413,7 +412,7 @@ fun russian(n: Int): String {
     while (list[0] == ' ')
         list.removeAt(0)
 
-
+repeat(3){
     var count = list.lastIndex
     while (count > 0) {
         if ((list[count - 1] == list[count]) && (list[count] == ' ')) {
@@ -422,6 +421,6 @@ fun russian(n: Int): String {
         }
         count -= 1
     }
-
+}
     return list.joinToString(prefix = "", postfix = "", separator = "")
 }
