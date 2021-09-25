@@ -2,8 +2,14 @@
 
 package lesson4.task1
 
-import lesson1.task1.discriminant
+import kotlinx.html.DEL
+import lesson7.task1.transliterate
 import kotlin.math.sqrt
+
+fun sqr(x: Int) = x * x
+fun sqr(x: Double) = x * x
+fun discriminant(a: Double, b: Double, c: Double) = sqr(b) - 4 * a * c
+
 
 // Урок 4: списки
 // Максимальное количество баллов = 12
@@ -303,8 +309,6 @@ fun roman(n: Int): String {
         num400 /= 10
         num500 /= 10
     }
-
-
     return ans
 }
 
@@ -315,4 +319,109 @@ fun roman(n: Int): String {
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    var ans: String = ""
+    var a = arrayOfNulls<String>(5001)
+    a[0] = ""
+    a[1] = "один"
+    a[2] = "два"
+    a[3] = "три"
+    a[4] = "четыре"
+    a[5] = "пять"
+    a[6] = "шесть"
+    a[7] = "семь"
+    a[8] = "восемь"
+    a[9] = "девять"
+    a[10] = "десять"
+    a[11] = "одиннадцать"
+    a[12] = "двенадцать"
+    a[13] = "тринадцать"
+    a[14] = "четырнадцать"
+    a[15] = "пятнадцать"
+    a[16] = "шестнадцать"
+    a[17] = "семнадцать"
+    a[18] = "восемьнадцать"
+    a[19] = "девятнадцать"
+    a[20] = "двадцать"
+    a[30] = "тридцать"
+    a[40] = "сорок"
+    a[50] = "пятьдесят"
+    a[60] = "шестьдесят"
+    a[70] = "семьдесят"
+    a[80] = "восемьдесят"
+    a[90] = "девяносто"
+    a[100] = "сто"
+    a[200] = "двести"
+    a[300] = "триста"
+    a[400] = "четыреста"
+    a[500] = "пятьсот"
+    a[600] = "шестьсот"
+    a[700] = "семьсот"
+    a[800] = "восемьсот"
+    a[900] = "девятьсот"
+    a[1000] = "одна тысяча"
+    a[2000] = "две тысячи"
+    a[3000] = "тысячи"
+    a[5000] = "тысяч"
+
+    if (n >= 1000) {
+        val thou = n / 1000
+        if (thou < 10)
+            when (thou) {
+                1 -> ans += a[1000]
+                2 -> ans += a[2000]
+                in 3..4 -> ans += a[thou] + " " + a[3000]
+                in 5..9 -> ans += a[thou] + " " + a[5000]
+            }
+        else {
+            val hun = thou / 100 * 100
+            ans += a[hun] + " "
+            val doz = thou % 100
+            if (((doz < 20) && (doz > 9)) || (doz / 10 == 0))
+                ans += a[doz] + " " + a[5000] + " "
+            else {
+                ans += a[doz / 10 * 10] + " "
+                val uni = doz % 10
+                when (uni) {
+                    1 -> ans += a[1000] + " "
+                    2 -> ans += a[2000] + " "
+                    in 3..4 -> ans += a[uni] + " " + a[3000] + " "
+                    in 5..9 -> ans += a[uni] + " " + a[5000] + " "
+                }
+            }
+        }
+    }
+
+    val thou = n % 1000
+    val hun = thou / 100 * 100
+    ans += a[hun] + " "
+    val doz = thou % 100
+    if (((doz < 20) && (doz > 9)) || (doz / 10 == 0))
+        ans += a[doz] + " "
+    else
+        ans += a[doz / 10 * 10] + " " + a[doz % 10]
+
+
+    var list = mutableListOf<Char>()
+
+    for (i in 0..ans.lastIndex)
+        list.add(ans[i])
+
+    while (list[list.lastIndex] == ' ')
+        list.removeAt(list.lastIndex)
+
+    while (list[0] == ' ')
+        list.removeAt(0)
+
+
+    var count = list.lastIndex
+    while (count > 0) {
+        if ((list[count - 1] == list[count]) && (list[count] == ' ')) {
+            list.removeAt(count)
+            count -= 1
+        }
+        count -= 1
+    }
+
+    return list.joinToString(prefix = "", postfix = "", separator = "")
+}
