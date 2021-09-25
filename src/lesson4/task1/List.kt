@@ -370,8 +370,8 @@ fun russian(n: Int): String {
             when (thou) {
                 1 -> ans += a[1000]
                 2 -> ans += a[2000]
-                in 3..4 -> ans += a[thou] + " " + a[3000]
-                in 5..9 -> ans += a[thou] + " " + a[5000]
+                in 3..4 -> ans += a[thou] + " " + a[3000]+" "
+                in 5..9 -> ans += a[thou] + " " + a[5000]+" "
             }
         else {
             val hun = thou / 100 * 100
