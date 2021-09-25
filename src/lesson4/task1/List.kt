@@ -377,7 +377,7 @@ fun russian(n: Int): String {
             val hun = thou / 100 * 100
             ans += a[hun] + " "
             val doz = thou % 100
-            if (((doz < 20) && (doz > 9)) || (doz / 10 == 0))
+            if (((doz < 20) && (doz > 9)) || (doz % 10 == 0))
                 ans += a[doz] + " " + a[5000] + " "
             else {
                 ans += a[doz / 10 * 10] + " "
@@ -396,7 +396,7 @@ fun russian(n: Int): String {
     val hun = thou / 100 * 100
     ans += a[hun] + " "
     val doz = thou % 100
-    if (((doz < 20) && (doz > 9)) || (doz / 10 == 0))
+    if (((doz < 20) && (doz > 9)) || (doz % 10 == 0))
         ans += a[doz] + " "
     else
         ans += a[doz / 10 * 10] + " " + a[doz % 10]
