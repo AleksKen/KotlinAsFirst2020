@@ -72,13 +72,12 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 fun ageDescription(age: Int): String {
     var ans: String = ""
-    if ((age % 10 > 4) or (age % 10 == 0) or ((age % 100 > 10) and (age % 100 < 20)))
-        ans = "$age лет"
-    else if (age % 10 == 1)
-        ans = "$age год"
-    else
-        ans = "$age года"
-    return ans
+    if ((age % 10 > 4) || (age % 10 == 0) || ((age % 100 > 10) && (age % 100 < 20)))
+        return "$age лет"
+    else when {
+        (age % 10 == 1) -> return "$age год"
+        else -> return "$age года"
+    }
 }
 
 /**
@@ -190,14 +189,12 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
         if (((b < c) && (a < c)) || ((c < a) && (d < a)))
             ans = -1
         else {
-            if ((b < d) && (a < c))
-                ans = b - c
-            if ((d < b) && (c < a))
-                ans = d - a
-            if ((c >= a) && (d >= a) && (c <= b) && (d <= b))
-                ans = d - c
-            if ((c <= a) && (b >= c) && (a <= d) && (b <= d))
-                ans = b - a
+            when {
+                ((b < d) && (a < c)) -> ans = b - c
+                ((d < b) && (c < a)) -> ans = d - a
+                ((c >= a) && (d >= a) && (c <= b) && (d <= b)) -> ans = d - c
+                ((c <= a) && (b >= c) && (a <= d) && (b <= d)) -> ans = b - a
+            }
         }
     }
     return ans
