@@ -123,12 +123,11 @@ fun whichRookThreatens(
     rookX2: Int, rookY2: Int
 ): Int {
     var ans: Int = 0
-    if ((rookX1 == kingX) || (rookY1 == kingY))
-        ans = 1
-    if ((rookX2 == kingX) || (rookY2 == kingY))
-        ans = 2
-    if (((rookX2 == kingX) || (rookY2 == kingY)) && ((rookX1 == kingX) || (rookY1 == kingY)))
-        ans = 3
+    when {
+        ((rookX1 == kingX) || (rookY1 == kingY)) -> ans = 1
+        ((rookX2 == kingX) || (rookY2 == kingY)) -> ans = 2
+        (((rookX2 == kingX) || (rookY2 == kingY)) && ((rookX1 == kingX) || (rookY1 == kingY))) -> ans = 3
+    }
     return ans
 }
 
