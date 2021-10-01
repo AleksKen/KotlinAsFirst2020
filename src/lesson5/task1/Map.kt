@@ -284,9 +284,9 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     for (i in 0..list.lastIndex) {
         val sample = number - list[i]
         val index = list.binarySearch(sample)
-        if ((index >= 0) && (index!=i))
+        if ((index >= 0) && (index!=i)){
             ans = Pair(i, index)
-        break
+            break}
     }
     return ans
 }
