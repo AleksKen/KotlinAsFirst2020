@@ -200,31 +200,41 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
+
+fun getAns(num: Int, k: Int, n: Int): Int {
+    if (k - n == 0)
+        return (num % 10).toDouble().toInt()
+    else
+        return ((num / 10.0.pow(k - n)) % 10).toInt()
+}
+
+fun GetNumAns(elem: Int, k: Int, n: Int): Int {
+    var num = elem
+    var countDig = 0
+    while (num > 0) {
+        countDig += 1
+        num /= 10
+    }
+    var count = k
+    count += countDig
+    if (k >= n)
+        return elem
+    return 0
+}
+
+
 fun squareSequenceDigit(n: Int): Int {
-    var k = 2
+    val k = 2
     var numAns = 0
     val squar = mutableListOf<Int>(1, 4)
     if (n > 2) {
         for (i in 2..n) {
             squar.add(sqr(i + 1))
-            var num = squar[i]
-            var countDig = 0
-            while (num > 0) {
-                countDig += 1
-                num /= 10
-            }
-            k += countDig
-            if (k >= n) {
-                numAns = squar[i]
+            numAns = GetNumAns(squar[i], k, n)
+            if (numAns != 0)
                 break
-            }
         }
-        var ans: Double = 0.0
-        if (k - n == 0)
-            ans = (numAns % 10).toDouble()
-        else
-            ans = (numAns / 10.0.pow(k - n)) % 10
-        return ans.toInt()
+        return getAns(numAns, k, n)
     } else
         return squar[n - 1]
 }
@@ -239,30 +249,17 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    var k = 2
+    val k = 2
     var numAns = 0
     val fibNums = mutableListOf<Int>(1, 1)
     if (n > 2) {
         for (i in 2..n) {
             fibNums.add(fibNums[i - 1] + fibNums[i - 2])
-            var num = fibNums[i]
-            var countDig = 0
-            while (num > 0) {
-                countDig += 1
-                num /= 10
-            }
-            k += countDig
-            if (k >= n) {
-                numAns = fibNums[i]
+            numAns = GetNumAns(fibNums[i], k, n)
+            if (numAns != 0)
                 break
-            }
         }
-        var ans: Double = 0.0
-        if (k - n == 0)
-            ans = (numAns % 10).toDouble()
-        else
-            ans = (numAns / 10.0.pow(k - n)) % 10
-        return ans.toInt()
+        return getAns(numAns, k, n)
     } else
         return fibNums[n - 1]
 }
