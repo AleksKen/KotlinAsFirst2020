@@ -208,7 +208,7 @@ fun getAns(num: Int, k: Int, n: Int): Int {
         return ((num / 10.0.pow(k - n)) % 10).toInt()
 }
 
-fun GetNumAns (elem:Int, k: Int, n: Int): Int{
+fun GetNumAns(elem: Int, k: Int, n: Int): Int {
     var num = elem
     var countDig = 0
     while (num > 0) {
@@ -231,9 +231,10 @@ fun squareSequenceDigit(n: Int): Int {
         for (i in 2..n) {
             squar.add(sqr(i + 1))
 
-            if (numAns != 0){
+            if (numAns != 0) {
                 numAns = GetNumAns(squar[i], k, n)
-                break}
+                break
+            }
         }
         return getAns(numAns, k, n)
     } else
@@ -251,21 +252,14 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    var k = 2
+    val k = 2
     var numAns = 0
     val fibNums = mutableListOf<Int>(1, 1)
     if (n > 2) {
         for (i in 2..n) {
             fibNums.add(fibNums[i - 1] + fibNums[i - 2])
-            var num = fibNums[i]
-            var countDig = 0
-            while (num > 0) {
-                countDig += 1
-                num /= 10
-            }
-            k += countDig
-            if (k >= n) {
-                numAns = fibNums[i]
+            if (numAns != 0) {
+                numAns = GetNumAns(fibNums[i], k, n)
                 break
             }
         }
