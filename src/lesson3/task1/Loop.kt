@@ -201,14 +201,9 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 
-fun getAns(num: Int, k: Int, n: Int): Int {
-    if (k - n == 0)
-        return (num % 10).toDouble().toInt()
-    else
-        return ((num / 10.0.pow(k - n)) % 10).toInt()
-}
 
-fun GetNumAns(elem: Int, k: Int, n: Int): Int {
+
+fun GetNumAns (elem:Int, k: Int, n: Int): Int{
     var num = elem
     var countDig = 0
     while (num > 0) {
@@ -222,6 +217,12 @@ fun GetNumAns(elem: Int, k: Int, n: Int): Int {
     return 0
 }
 
+fun getAns(numAns: Int, k: Int, n: Int): Int {
+    if (k - n == 0)
+        return (numAns % 10).toDouble().toInt()
+    else
+        return ((numAns / 10.0.pow(k - n)) % 10).toInt()
+}
 
 fun squareSequenceDigit(n: Int): Int {
     val k = 2
@@ -230,12 +231,9 @@ fun squareSequenceDigit(n: Int): Int {
     if (n > 2) {
         for (i in 2..n) {
             squar.add(sqr(i + 1))
-
-            if (numAns != 0) {
+            if (numAns != 0){
                 numAns = GetNumAns(squar[i], k, n)
-                break
-            }
-        }
+                break }}
         return getAns(numAns, k, n)
     } else
         return squar[n - 1]
@@ -258,11 +256,9 @@ fun fibSequenceDigit(n: Int): Int {
     if (n > 2) {
         for (i in 2..n) {
             fibNums.add(fibNums[i - 1] + fibNums[i - 2])
-            if (numAns != 0) {
+            if (numAns!=0){
                 numAns = GetNumAns(fibNums[i], k, n)
-                break
-            }
-        }
+                break }}
         return getAns(numAns, k, n)
     } else
         return fibNums[n - 1]
