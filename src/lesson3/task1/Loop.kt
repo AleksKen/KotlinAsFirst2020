@@ -202,8 +202,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  */
 
 
-
-fun GetPair (elem:Int, k: Int, n: Int): Pair<Int, Int>{
+fun GetPair(elem: Int, k: Int, n: Int): Pair<Int, Int> {
     var num = elem
     var countDig = 0
     while (num > 0) {
@@ -235,7 +234,8 @@ fun squareSequenceDigit(n: Int): Int {
             numAns = (GetPair(squar[i], k, n)).first
             k = (GetPair(squar[i], k, n)).second
             if (numAns != 0)
-                break }
+                break
+        }
         return getAns(numAns, k, n)
     } else
         return squar[n - 1]
@@ -260,8 +260,9 @@ fun fibSequenceDigit(n: Int): Int {
             fibNums.add(fibNums[i - 1] + fibNums[i - 2])
             numAns = (GetPair(fibNums[i], k, n)).first
             k = (GetPair(fibNums[i], k, n)).second
-            if (numAns!=0)
-                break }
+            if (numAns != 0)
+                break
+        }
         return getAns(numAns, k, n)
     } else
         return fibNums[n - 1]
