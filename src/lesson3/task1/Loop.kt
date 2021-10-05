@@ -230,9 +230,10 @@ fun squareSequenceDigit(n: Int): Int {
     if (n > 2) {
         for (i in 2..n) {
             squar.add(sqr(i + 1))
-            numAns = GetNumAns(squar[i], k, n)
-            if (numAns != 0)
-                break
+
+            if (numAns != 0){
+                numAns = GetNumAns(squar[i], k, n)
+                break}
         }
         return getAns(numAns, k, n)
     } else
@@ -250,22 +251,28 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    val k = 2
+    var k = 2
     var numAns = 0
     val fibNums = mutableListOf<Int>(1, 1)
     if (n > 2) {
         for (i in 2..n) {
             fibNums.add(fibNums[i - 1] + fibNums[i - 2])
-            numAns = GetNumAns(fibNums[i], k, n)
-            if (numAns != 0)
+            var num = fibNums[i]
+            var countDig = 0
+            while (num > 0) {
+                countDig += 1
+                num /= 10
+            }
+            k += countDig
+            if (k >= n) {
+                numAns = fibNums[i]
                 break
+            }
         }
         return getAns(numAns, k, n)
     } else
         return fibNums[n - 1]
 }
-
-
 
 
 
