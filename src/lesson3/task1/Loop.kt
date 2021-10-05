@@ -208,7 +208,7 @@ fun getAns(num: Int, k: Int, n: Int): Int {
         return ((num / 10.0.pow(k - n)) % 10).toInt()
 }
 
-fun GetNumAns(elem: Int, k: Int, n: Int): Int {
+fun GetNumAns (elem:Int, k: Int, n: Int): Int{
     var num = elem
     var countDig = 0
     while (num > 0) {
@@ -217,7 +217,7 @@ fun GetNumAns(elem: Int, k: Int, n: Int): Int {
     }
     var count = k
     count += countDig
-    if (k >= n)
+    if (count >= n)
         return elem
     return 0
 }
@@ -238,6 +238,7 @@ fun squareSequenceDigit(n: Int): Int {
     } else
         return squar[n - 1]
 }
+
 
 /**
  * Сложная (5 баллов)
@@ -263,6 +264,8 @@ fun fibSequenceDigit(n: Int): Int {
     } else
         return fibNums[n - 1]
 }
+
+
 
 
 
