@@ -214,7 +214,8 @@ fun GetNumAns (elem:Int, k: Int, n: Int): Int{
     count += countDig
     if (count >= n)
         return elem
-    return 0
+    else
+        return 0
 }
 
 fun getAns(numAns: Int, k: Int, n: Int): Int {
@@ -231,9 +232,9 @@ fun squareSequenceDigit(n: Int): Int {
     if (n > 2) {
         for (i in 2..n) {
             squar.add(sqr(i + 1))
-            if (numAns != 0){
-                numAns = GetNumAns(squar[i], k, n)
-                break }}
+            numAns = GetNumAns(squar[i], k, n)
+            if (numAns != 0)
+                break }
         return getAns(numAns, k, n)
     } else
         return squar[n - 1]
