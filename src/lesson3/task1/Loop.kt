@@ -203,7 +203,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
 
 
 
-fun GetNumAns (elem:Int, k: Int, n: Int): Int{
+fun GetPair (elem:Int, k: Int, n: Int): Pair<Int, Int>{
     var num = elem
     var countDig = 0
     while (num > 0) {
@@ -213,9 +213,9 @@ fun GetNumAns (elem:Int, k: Int, n: Int): Int{
     var count = k
     count += countDig
     if (count >= n)
-        return elem
+        return Pair(elem, count)
     else
-        return 0
+        return Pair(0, count)
 }
 
 fun getAns(numAns: Int, k: Int, n: Int): Int {
@@ -226,13 +226,14 @@ fun getAns(numAns: Int, k: Int, n: Int): Int {
 }
 
 fun squareSequenceDigit(n: Int): Int {
-    val k = 2
+    var k = 2
     var numAns = 0
     val squar = mutableListOf<Int>(1, 4)
     if (n > 2) {
         for (i in 2..n) {
             squar.add(sqr(i + 1))
-            numAns = GetNumAns(squar[i], k, n)
+            numAns = (GetPair(squar[i], k, n)).first
+            k = (GetPair(squar[i], k, n)).second
             if (numAns != 0)
                 break }
         return getAns(numAns, k, n)
@@ -251,15 +252,16 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    val k = 2
+    var k = 2
     var numAns = 0
     val fibNums = mutableListOf<Int>(1, 1)
     if (n > 2) {
         for (i in 2..n) {
             fibNums.add(fibNums[i - 1] + fibNums[i - 2])
-            if (numAns!=0){
-                numAns = GetNumAns(fibNums[i], k, n)
-                break }}
+            numAns = (GetPair(fibNums[i], k, n)).first
+            k = (GetPair(fibNums[i], k, n)).second
+            if (numAns!=0)
+                break }
         return getAns(numAns, k, n)
     } else
         return fibNums[n - 1]
