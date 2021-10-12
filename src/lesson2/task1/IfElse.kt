@@ -159,17 +159,12 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     val a = mutableListOf(a, b, c)
     a.sort()
     var ans: Int = 2
-    if ((a[0] + a[1] < a[2]) || (a[1] + a[2] < a[0]) || (a[0] + a[2] < a[1]))
-        ans = -1
-    else
-        if ((sqr(a[0]) + sqr(a[1])) == sqr(a[2]))
-            ans = 1
-        else
-            if ((sqr(a[0]) + sqr(a[1])) > sqr(a[2]))
-                ans = 0
-            else
-                ans = 2
-    return ans
+    when {
+        ((a[0] + a[1] < a[2]) || (a[1] + a[2] < a[0]) || (a[0] + a[2] < a[1])) -> return -1
+        ((sqr(a[0]) + sqr(a[1])) == sqr(a[2])) -> return 1
+        ((sqr(a[0]) + sqr(a[1])) > sqr(a[2])) -> return 0
+        else -> return 2
+    }
 }
 
 /**
