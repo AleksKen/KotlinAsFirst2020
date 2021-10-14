@@ -75,5 +75,5 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
         if (side[i] <= s)
             countS += 1
     }
-    return (((countR > 1) && (countS > 1)) || ((countR == 1) && (countS > 1)) || ((countR > 1) && (countS == 1)))
+    return (((countR > 1) && (countS >= 1)) || ((countR == 1) && (countS > 1)))
 }
