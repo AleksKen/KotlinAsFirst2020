@@ -85,9 +85,16 @@ fun digitNumber(n: Int): Int = TODO()
  */
 fun fib(n: Int): Int {
     val fibNums = mutableListOf<Int>(1, 1)
-    for (i in 2..n)
-        fibNums.add(fibNums[i - 1] + fibNums[i - 2])
-    return fibNums[n - 1]
+    var count = n
+    if (n > 2) {
+        while (count - 2 > 0) {
+            fibNums.add(fibNums[0] + fibNums[1])
+            fibNums.removeAt(0)
+            count -= 1
+        }
+        return fibNums[1]
+    } else
+        return fibNums[n - 1]
 }
 
 /**
