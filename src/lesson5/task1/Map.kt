@@ -286,25 +286,24 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     var searchPair: Pair<Int, Int> = Pair(-1, -1)
     copy.sort()
 
-    for (i in 0..copy.size-1){
+    for (i in 0..copy.size - 1) {
         val searchObject = number - copy[i]
-        if (copy.binarySearch(searchObject)>-1) {
+        if (copy.binarySearch(searchObject) > -1) {
             searchPair = Pair(copy[i], searchObject)
-            break}
+            break
+        }
     }
 
-    if ((searchPair.first!=-1) && (searchPair.second!=-1))
-        for (i in 0..list.size-1){
-            if ((list[i]==searchPair.first) && (ans.first==-1))
+    if ((searchPair.first != -1) && (searchPair.second != -1))
+        for (i in 0..list.size - 1) {
+            if ((list[i] == searchPair.first) && (ans.first == -1))
                 ans = Pair(i, ans.second)
-            if ((list[i]==searchPair.second) && (ans.first!=i))
+            if ((list[i] == searchPair.second) && (ans.first != i))
                 ans = Pair(ans.first, i)
-            println(ans)
         }
-    if ((ans.first==-1) || (ans.second==-1))
-        ans= Pair(-1, -1)
+    if ((ans.first == -1) || (ans.second == -1))
+        ans = Pair(-1, -1)
     return ans
-
 }
 
 
