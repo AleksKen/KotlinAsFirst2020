@@ -329,7 +329,30 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
  *   ) -> emptySet()
  */
 
+class treas(var name: String, var weight: Int, var price: Int) {
 
-fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+}
+
+fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
+    var copy = capacity
+    var ansGap = mutableSetOf<String>()
+    var listForSort = mutableListOf<treas>()
+    var b = treasures.toList()
+    for (i in 0..b.size - 1) {
+        listForSort.add(treas(b[i].first, b[i].second.first, b[i].second.second))
+    }
+
+    val sortedList = listForSort.sortedWith(compareBy<treas>
+    { it.weight }.thenBy { it.price })
+
+    for (i in 0..sortedList.size - 1)
+        if (copy - sortedList[i].weight > 0) {
+            copy -= sortedList[i].weight
+            ansGap.add(sortedList[i].name)
+
+        }
+
+    return ansGap
+}
 
 
