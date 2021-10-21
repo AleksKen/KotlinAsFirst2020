@@ -346,7 +346,7 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
     { it.weight }.thenBy { it.price })
 
     for (i in 0..sortedList.size - 1)
-        if (copy - sortedList[i].weight > 0) {
+        if (copy - sortedList[i].weight > -1) {
             copy -= sortedList[i].weight
             ansGap.add(sortedList[i].name)
 
