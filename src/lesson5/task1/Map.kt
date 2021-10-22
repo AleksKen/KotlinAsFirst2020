@@ -343,7 +343,7 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
     }
 
     val sortedList = listForSort.sortedWith(compareByDescending <treas>
-    { it.weight }.thenByDescending { it.price })
+    { it.weight }.thenBy { it.price })
 
 
 
