@@ -343,9 +343,9 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
     }
 
     val sortedList = listForSort.sortedWith(compareByDescending <treas>
-    { it.weight }.thenBy { it.price })
+    { it.weight }.thenByDescending { it.price })
 
-
+    println(b)
 
     for (i in 0..sortedList.size - 1)
         if (copy - sortedList[i].weight > -1) {
