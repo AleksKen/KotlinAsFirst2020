@@ -301,8 +301,6 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
             if ((list[i] == searchPair.second) && (ans.first != i))
                 ans = Pair(ans.first, i)
         }
-    if ((ans.first == -1) || (ans.second == -1))
-        ans = Pair(-1, -1)
     return ans
 }
 
@@ -343,7 +341,7 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
     }
 
     val sortedList = listForSort.sortedWith(compareByDescending <treas>
-    { it.weight }.thenBy { it.price })
+    { it.weight }.thenByDescending { it.price })
 
 
 
