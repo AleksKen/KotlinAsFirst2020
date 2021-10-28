@@ -140,6 +140,7 @@ fun centerFile(inputName: String, outputName: String) {
         }
         str += line
         writer.write(str)
+        writer.newLine()
     }
     writer.close()
 }
