@@ -204,7 +204,7 @@ fun count(str: String): MutableList<Pair<Char, Int>> {
 
 fun plusMinus(expression: String): Int {
     var ans = 0
-    if ((!(Character.isDigit(expression[0]))) || (!(check(expression))))
+    if ((!(Character.isDigit(expression[0]))) || (!(check(expression))) || (expression.length>0))
         throw  IllegalArgumentException()
     else {
         var list = count(expression)
