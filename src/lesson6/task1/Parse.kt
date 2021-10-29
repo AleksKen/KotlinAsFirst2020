@@ -167,7 +167,56 @@ fun bestHighJump(jumps: String): Int {
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun check(str: String): Boolean {
+    for (i in 0..str.lastIndex - 2) {
+        if (((Character.isDigit(str[i])) && (Character.isDigit(str[i + 2]))) ||
+            ((!(Character.isDigit(str[i]))) && (!(Character.isDigit(str[i + 2]))) && (str[i] != ' ') && (str[i + 2] != ' '))
+        )
+            return false
+    }
+    return true
+}
+
+fun count(str: String): MutableList<Pair<Char, Int>> {
+    var numberSign = mutableListOf<Pair<Char, Int>>()
+    var num = 0
+    var useStr = "+ " + str + " "
+    var x = ' '
+    for (i in 0..useStr.length - 1) {
+        if (useStr[i] == '+')
+            x = '+'
+        if (useStr[i] == '-')
+            x = '-'
+
+        if (Character.isDigit(useStr[i])) {
+            var a = Character.getNumericValue(useStr[i])
+            num = num * 10 + a
+        }
+        if ((x != ' ') && (num != 0) && (useStr[i] == ' ')) {
+            numberSign.add(Pair(x, num))
+            num = 0
+            x = ' '
+        }
+    }
+    return numberSign
+}
+
+
+fun plusMinus(expression: String): Int {
+    var ans = 0
+    if ((!(Character.isDigit(expression[0]))) || (!(check(expression))))
+        throw  IllegalArgumentException()
+    else {
+        var list = count(expression)
+        for (i in 0..list.lastIndex) {
+            if (list[i].first == '+')
+                ans += list[i].second
+            if (list[i].first == '-')
+                ans -= list[i].second
+        }
+        return ans
+    }
+}
 
 /**
  * Сложная (6 баллов)
