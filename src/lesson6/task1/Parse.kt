@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import javax.xml.stream.events.Characters
+
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
 // Рекомендуемое количество баллов = 11
@@ -127,7 +129,34 @@ fun bestLongJump(jumps: String): Int = TODO()
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+
+
+fun bestHighJump(jumps: String): Int {
+    var highAttempt = mutableListOf<Pair<Int, String>>()
+    var num = 0
+    var jumpsStr = jumps + ' '
+    var str = StringBuilder()
+    for (i in 0..jumpsStr.length - 1) {
+        if (Character.isDigit(jumpsStr[i])) {
+            var a = Character.getNumericValue(jumpsStr[i])
+            num = num * 10 + a
+        } else
+            if (jumpsStr[i] != ' ')
+                str.append(jumpsStr[i])
+
+        if ((str.toString() != "") && (num != 0) && (jumpsStr[i] == ' ')) {
+            highAttempt.add(Pair(num, str.toString()))
+            num = 0
+            str.setLength(0)
+        }
+    }
+    var ans = -1
+    for (i in 0..highAttempt.lastIndex)
+        for (j in 0..highAttempt[i].second.length - 1)
+            if ((highAttempt[i].second[j] == '+') && (highAttempt[i].first > ans))
+                ans = highAttempt[i].first
+    return ans
+}
 
 /**
  * Сложная (6 баллов)
@@ -213,4 +242,6 @@ fun fromRoman(roman: String): Int = TODO()
  * IllegalArgumentException должен бросаться даже если ошибочная команда не была достигнута в ходе выполнения.
  *
  */
-fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()
+fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
+    TODO()
+}
