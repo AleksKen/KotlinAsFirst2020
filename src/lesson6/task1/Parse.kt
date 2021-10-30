@@ -193,30 +193,31 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-class shop(var name: String,  var price: Double)
+class shop(var name: String, var price: Double)
 
-fun mostExpensive(description: String):String {
+fun mostExpensive(description: String): String {
     var listShop = mutableListOf<shop>()
-    var numStr= StringBuilder()
-    var useStr = description+';'
-    var names=StringBuilder()
-    if (description!=""){
-    for (i in 0..useStr.lastIndex) {
-        if (useStr[i]==';'){
-            listShop.add(shop(names.toString(), numStr.toString().toDouble()))
-            names.setLength(0)
-            numStr.setLength(0)}
+    var numStr = StringBuilder()
+    var useStr = description + ';'
+    var names = StringBuilder()
+    if (description != "") {
+        for (i in 0..useStr.lastIndex) {
+            if (useStr[i] == ';') {
+                listShop.add(shop(names.toString(), numStr.toString().toDouble()))
+                names.setLength(0)
+                numStr.setLength(0)
+            }
 
-        if ((Character.isDigit(useStr[i])) || (useStr[i]=='.'))
-            numStr.append(useStr[i])
+            if ((Character.isDigit(useStr[i])) || (useStr[i] == '.'))
+                numStr.append(useStr[i])
 
-        if (Character.isLetter(useStr[i]))
-            names.append(useStr[i])
-    }
-    var sortedList = listShop.sortedWith(compareByDescending <shop>
-    {it.price })
-    return sortedList[0].name}
-    else
+            if (Character.isLetter(useStr[i]))
+                names.append(useStr[i])
+        }
+        var sortedList = listShop.sortedWith(compareByDescending<shop>
+        { it.price })
+        return sortedList[0].name
+    } else
         return ""
 }
 
