@@ -219,8 +219,7 @@ fun mostExpensive(description: String): String {
         var sortedList = listShop.sortedWith(compareByDescending<shop>
         { it.price })
         return sortedList[0].name
-    }
-    else
+    } else
         return ""
 }
 
