@@ -201,9 +201,10 @@ fun mostExpensive(description: String): String {
     var useStr = description + ';'
     var names = StringBuilder()
     if (description != "") {
-        if (description != ", 0"){
         for (i in 0..useStr.lastIndex) {
             if (useStr[i] == ';') {
+                if (names.toString() == "")
+                    return "Any good with price 0.0"
                 listShop.add(shop(names.toString(), numStr.toString().toDouble()))
                 names.setLength(0)
                 numStr.setLength(0)
@@ -219,8 +220,6 @@ fun mostExpensive(description: String): String {
         { it.price })
         return sortedList[0].name
     }
-    else
-        return "Any good with price 0.0"}
     else
         return ""
 }
