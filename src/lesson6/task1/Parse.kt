@@ -2,6 +2,7 @@
 
 package lesson6.task1
 
+import lesson5.task1.treas
 import javax.xml.stream.events.Characters
 
 // Урок 6: разбор строк, исключения
@@ -167,55 +168,8 @@ fun bestHighJump(jumps: String): Int {
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun check(str: String): Boolean {
-    for (i in 0..str.lastIndex - 2) {
-        if (((Character.isDigit(str[i])) && (Character.isDigit(str[i + 2])) && (str[i+1] == ' ')) ||
-            ((!(Character.isDigit(str[i]))) && (!(Character.isDigit(str[i + 2]))) && (str[i] != ' ') && (str[i + 2] != ' ')))
-            return false
-    }
-    return true
-}
 
-fun count(str: String): MutableList<Pair<Char, Int>> {
-    var numberSign = mutableListOf<Pair<Char, Int>>()
-    var num = 0
-    var useStr = "+ " + str + " "
-    var x = ' '
-    for (i in 0..useStr.length - 1) {
-        if (useStr[i] == '+')
-            x = '+'
-        if (useStr[i] == '-')
-            x = '-'
-
-        if (Character.isDigit(useStr[i])) {
-            var a = Character.getNumericValue(useStr[i])
-            num = num * 10 + a
-        }
-        if ((x != ' ') && (num != 0) && (useStr[i] == ' ')) {
-            numberSign.add(Pair(x, num))
-            num = 0
-            x = ' '
-        }
-    }
-    return numberSign
-}
-
-
-fun plusMinus(expression: String): Int {
-    var ans = 0
-    if ((!(Character.isDigit(expression[0]))) || (!(check(expression)))){
-         throw  IllegalArgumentException(expression)}
-    else {
-        var list = count(expression)
-        for (i in 0..list.lastIndex) {
-            if (list[i].first == '+')
-                ans += list[i].second
-            if (list[i].first == '-')
-                ans -= list[i].second
-        }
-        return ans
-    }
-}
+fun plusMinus(expression: String): Int = TODO()
 
 /**
  * Сложная (6 баллов)
@@ -239,7 +193,32 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+class shop(var name: String,  var price: Double)
+
+fun mostExpensive(description: String):String {
+    var listShop = mutableListOf<shop>()
+    var numStr= StringBuilder()
+    var useStr = description+';'
+    var names=StringBuilder()
+    if (description!=""){
+    for (i in 0..useStr.lastIndex) {
+        if (useStr[i]==';'){
+            listShop.add(shop(names.toString(), numStr.toString().toDouble()))
+            names.setLength(0)
+            numStr.setLength(0)}
+
+        if ((Character.isDigit(useStr[i])) || (useStr[i]=='.'))
+            numStr.append(useStr[i])
+
+        if (Character.isLetter(useStr[i]))
+            names.append(useStr[i])
+    }
+    var sortedList = listShop.sortedWith(compareByDescending <shop>
+    {it.price })
+    return sortedList[0].name}
+    else
+        return ""
+}
 
 /**
  * Сложная (6 баллов)
