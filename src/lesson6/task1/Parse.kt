@@ -169,9 +169,8 @@ fun bestHighJump(jumps: String): Int {
  */
 fun check(str: String): Boolean {
     for (i in 0..str.lastIndex - 2) {
-        if (((Character.isDigit(str[i])) && (Character.isDigit(str[i + 2]))) ||
-            ((!(Character.isDigit(str[i]))) && (!(Character.isDigit(str[i + 2]))) && (str[i] != ' ') && (str[i + 2] != ' '))
-        )
+        if (((Character.isDigit(str[i])) && (Character.isDigit(str[i + 2])) && (str[i+1] == ' ')) ||
+            ((!(Character.isDigit(str[i]))) && (!(Character.isDigit(str[i + 2]))) && (str[i] != ' ') && (str[i + 2] != ' ')))
             return false
     }
     return true
@@ -204,8 +203,8 @@ fun count(str: String): MutableList<Pair<Char, Int>> {
 
 fun plusMinus(expression: String): Int {
     var ans = 0
-    if ((!(Character.isDigit(expression[0]))) || (!(check(expression))) || (expression.length>0))
-        throw  IllegalArgumentException()
+    if ((!(Character.isDigit(expression[0]))) || (!(check(expression)))){
+         throw  IllegalArgumentException(expression)}
     else {
         var list = count(expression)
         for (i in 0..list.lastIndex) {
