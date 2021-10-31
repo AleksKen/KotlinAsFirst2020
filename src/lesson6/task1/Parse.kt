@@ -195,33 +195,7 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  */
 class shop(var name: String, var price: Double)
 
-fun mostExpensive(description: String): String {
-    var listShop = mutableListOf<shop>()
-    var numStr = StringBuilder()
-    var useStr = description + ';'
-    var names = StringBuilder()
-    if (description != "") {
-        for (i in 0..useStr.lastIndex) {
-            if (useStr[i] == ';') {
-                if (names.toString() == "")
-                    return "Any good with price 0.0"
-                listShop.add(shop(names.toString(), numStr.toString().toDouble()))
-                names.setLength(0)
-                numStr.setLength(0)
-            }
-
-            if ((Character.isDigit(useStr[i])) || (useStr[i] == '.'))
-                numStr.append(useStr[i])
-
-            if (Character.isLetter(useStr[i]))
-                names.append(useStr[i])
-        }
-        var sortedList = listShop.sortedWith(compareByDescending<shop>
-        { it.price })
-        return sortedList[0].name
-    } else
-        return ""
-}
+fun mostExpensive(description: String): String { TODO() }
 
 /**
  * Сложная (6 баллов)

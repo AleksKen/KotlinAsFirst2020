@@ -112,40 +112,20 @@ fun sibilants(inputName: String, outputName: String) {
         ans.append(str[0])
         for (i in 1..str.lastIndex)
             when {
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ы')) -> ans.append(
-                    'И'
-                )
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ы')) -> ans.append(
-                    'и'
-                )
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ы')) -> ans.append('И')
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ы')) -> ans.append('и')
 
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ю')) -> ans.append(
-                    'У'
-                )
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ю')) -> ans.append(
-                    'у'
-                )
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ю')) -> ans.append('У')
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ю')) -> ans.append('у')
 
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Я')) -> ans.append(
-                    'А'
-                )
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'я')) -> ans.append(
-                    'а'
-                )
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Я')) -> ans.append('А')
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'я')) -> ans.append('а')
 
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Я')) -> ans.append(
-                    'А'
-                )
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'я')) -> ans.append(
-                    'а'
-                )
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Я')) -> ans.append('А')
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'я')) -> ans.append('а')
 
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ю')) -> ans.append(
-                    'У'
-                )
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ю')) -> ans.append(
-                    'у'
-                )
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ю')) -> ans.append('У')
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ю')) -> ans.append('у')
                 else -> ans.append(str[i])
             }
         writer.write(ans.toString())
@@ -173,27 +153,7 @@ fun sibilants(inputName: String, outputName: String) {
  * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых)
  *
  */
-fun centerFile(inputName: String, outputName: String) {
-    var writer = File(outputName).bufferedWriter()
-    var maxLineLength = 0
-    for (line in File(inputName).readLines())
-        if (line.length > maxLineLength)
-            maxLineLength = line.length
-
-    for (line in File(inputName).readLines()) {
-        val currentLine = line.length
-        val x = maxLineLength - currentLine
-        val n = (x / 2).toInt()
-        var str = ""
-        repeat(n) {
-            str += ' '
-        }
-        str += line
-        writer.write(str)
-        writer.newLine()
-    }
-    writer.close()
-}
+fun centerFile(inputName: String, outputName: String) { TODO()}
 
 /**
  * Сложная (20 баллов)
