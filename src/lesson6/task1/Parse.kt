@@ -186,7 +186,7 @@ fun firstDuplicateIndex(str: String): Int {
     var listWords = mutableListOf<String>()
     var word = StringBuilder()
     for (i in 0..useStr.lastIndex)
-        if (Character.isLetter(useStr[i]))
+        if (useStr[i]!=' ')
             word.append(useStr[i])
         else {
             listWords.add(word.toString())
