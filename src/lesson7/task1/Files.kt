@@ -126,6 +126,11 @@ fun sibilants(inputName: String, outputName: String) {
 
                 (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ю')) -> ans.append('У')
                 (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ю')) -> ans.append('у')
+
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ы')) -> ans.append('И')
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ы')) -> ans.append('и')
+
+
                 else -> ans.append(str[i])
             }
         writer.write(ans.toString())
