@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import java.lang.StringBuilder
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -103,7 +104,56 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    TODO()
+    var writer = File(outputName).bufferedWriter()
+    var ans = StringBuilder()
+    for (line in File(inputName).readLines()) {
+
+        var str = line
+        ans.append(str[0])
+        for (i in 1..str.lastIndex)
+            when {
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ы')) -> ans.append(
+                    'И'
+                )
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ы')) -> ans.append(
+                    'и'
+                )
+
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ю')) -> ans.append(
+                    'У'
+                )
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ю')) -> ans.append(
+                    'у'
+                )
+
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Я')) -> ans.append(
+                    'А'
+                )
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'я')) -> ans.append(
+                    'а'
+                )
+
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Я')) -> ans.append(
+                    'А'
+                )
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'я')) -> ans.append(
+                    'а'
+                )
+
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ю')) -> ans.append(
+                    'У'
+                )
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ю')) -> ans.append(
+                    'у'
+                )
+                else -> ans.append(str[i])
+            }
+        writer.write(ans.toString())
+        writer.newLine()
+        println(ans)
+        ans.setLength(0)
+    }
+    writer.close()
 }
 
 /**
