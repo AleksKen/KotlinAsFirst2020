@@ -180,7 +180,29 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    var useStr = str + ' '
+    var ans = -1
+    var listWords = mutableListOf<String>()
+    var word = StringBuilder()
+    for (i in 0..useStr.lastIndex)
+        if (Character.isLetter(useStr[i]))
+            word.append(useStr[i])
+        else {
+            listWords.add(word.toString())
+            word.setLength(0)
+        }
+    for (i in 0..listWords.lastIndex - 1) {
+        if ((listWords[i].toLowerCase()) == (listWords[i + 1].toLowerCase())) {
+            ans += 1
+            return ans
+        }
+        ans += listWords[i].length
+        ans += 1
+    }
+    ans = -1
+    return ans
+}
 
 /**
  * Сложная (6 баллов)
@@ -195,7 +217,9 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  */
 class shop(var name: String, var price: Double)
 
-fun mostExpensive(description: String): String { TODO() }
+fun mostExpensive(description: String): String {
+    TODO()
+}
 
 /**
  * Сложная (6 баллов)

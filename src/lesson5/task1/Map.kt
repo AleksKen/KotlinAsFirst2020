@@ -329,9 +329,7 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
  *   ) -> emptySet()
  */
 
-class treas(var name: String, var weight: Int, var price: Int) {
-
-}
+class treas(var name: String, var weight: Int, var price: Int)
 
 fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
     var copy = capacity
@@ -356,5 +354,4 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
 
     return ansGap
 }
-
 
