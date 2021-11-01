@@ -249,67 +249,59 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  */
 fun roman(n: Int): String {
     var num = n
-    var a = arrayOfNulls<String>(1001)
-    a[1] = "I"
-    a[4] = "IV"
-    a[5] = "V"
-    a[9] = "IX"
-    a[10] = "X"
-    a[40] = "XL"
-    a[50] = "L"
-    a[90] = "XC"
-    a[100] = "C"
-    a[400] = "CD"
-    a[500] = "D"
-    a[900] = "CM"
-    a[1000] = "M"
+    var translat = mutableMapOf(1 to "I")
+    translat.put(4, "IV")
+    translat.put(5, "V")
+    translat.put(9, "IX")
+    translat.put(10, "X")
+    translat.put(40, "XL")
+    translat.put(50, "L")
+    translat.put(90, "XC")
+    translat.put(100, "C")
+    translat.put(400, "CD")
+    translat.put(500, "D")
+    translat.put(900, "CM")
+    translat.put(1000, "M")
 
-    var ans: String = ""
+    var ans = StringBuilder()
     if (num >= 1000)
         while (num >= 1000) {
-            ans += a[1000]
+            ans.append(translat.getValue(1000))
             num -= 1000
         }
-
     var num100 = 100
-    var num900 = 900
-    var num400 = 400
-    var num500 = 500
 
     repeat(3) {
         if (num >= num100)
-            if (num - num900 >= 0) {
-                ans += a[num900]
-                num -= num900
+            if (num - 9 * num100 >= 0) {
+                ans.append(translat.getValue(9 * num100))
+                num -= 9 * num100
             } else
                 if ((num / num100 == 4) || (num / num100 == 5)) {
                     if (num / num100 == 4) {
-                        ans += a[num400]
-                        num -= num400
+                        ans.append(translat.getValue(4 * num100))
+                        num -= 4 * num100
                     } else {
-                        ans += a[num500]
-                        num -= num500
+                        ans.append(translat.getValue(5 * num100))
+                        num -= 5 * num100
                     }
                 } else
                     if (num / num100 < 4)
                         while (num >= num100) {
-                            ans += a[num100]
+                            ans.append(translat.getValue(num100))
                             num -= num100
                         }
                     else {
-                        ans += a[num500]
-                        num -= num500
+                        ans.append(translat.getValue(5 * num100))
+                        num -= 5 * num100
                         while (num >= num100) {
-                            ans += a[num100]
+                            ans.append(translat.getValue(num100))
                             num -= num100
                         }
                     }
         num100 /= 10
-        num900 /= 10
-        num400 /= 10
-        num500 /= 10
     }
-    return ans
+    return ans.toString()
 }
 
 /**
@@ -320,73 +312,73 @@ fun roman(n: Int): String {
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
 fun russian(n: Int): String {
-    var ans: String = ""
-    var a = arrayOfNulls<String>(5001)
-    a[0] = ""
-    a[1] = "один"
-    a[2] = "два"
-    a[3] = "три"
-    a[4] = "четыре"
-    a[5] = "пять"
-    a[6] = "шесть"
-    a[7] = "семь"
-    a[8] = "восемь"
-    a[9] = "девять"
-    a[10] = "десять"
-    a[11] = "одиннадцать"
-    a[12] = "двенадцать"
-    a[13] = "тринадцать"
-    a[14] = "четырнадцать"
-    a[15] = "пятнадцать"
-    a[16] = "шестнадцать"
-    a[17] = "семнадцать"
-    a[18] = "восемнадцать"
-    a[19] = "девятнадцать"
-    a[20] = "двадцать"
-    a[30] = "тридцать"
-    a[40] = "сорок"
-    a[50] = "пятьдесят"
-    a[60] = "шестьдесят"
-    a[70] = "семьдесят"
-    a[80] = "восемьдесят"
-    a[90] = "девяносто"
-    a[100] = "сто"
-    a[200] = "двести"
-    a[300] = "триста"
-    a[400] = "четыреста"
-    a[500] = "пятьсот"
-    a[600] = "шестьсот"
-    a[700] = "семьсот"
-    a[800] = "восемьсот"
-    a[900] = "девятьсот"
-    a[1000] = "одна тысяча"
-    a[2000] = "две тысячи"
-    a[3000] = "тысячи"
-    a[5000] = "тысяч"
+    var ans = StringBuilder()
+
+    var translat = mutableMapOf(0 to "")
+    translat.put(1, "один")
+    translat.put(2, "два")
+    translat.put(3, "три")
+    translat.put(4, "четыре")
+    translat.put(5, "пять")
+    translat.put(6, "шесть")
+    translat.put(7, "семь")
+    translat.put(8, "восемь")
+    translat.put(9, "девять")
+    translat.put(10, "десять")
+    translat.put(11, "одиннадцать")
+    translat.put(12, "двенадцать")
+    translat.put(13, "тринадцать")
+    translat.put(14, "четырнадцать")
+    translat.put(15, "пятнадцать")
+    translat.put(16, "шестнадцать")
+    translat.put(17, "семнадцать")
+    translat.put(18, "восемнадцать")
+    translat.put(19, "девятнадцать")
+    translat.put(20, "двадцать")
+    translat.put(30, "тридцать")
+    translat.put(40, "сорок")
+    translat.put(50, "пятьдесят")
+    translat.put(60, "шестьдесят")
+    translat.put(70, "семьдесят")
+    translat.put(80, "восемьдесят")
+    translat.put(90, "девяносто")
+    translat.put(100, "сто")
+    translat.put(200, "двести")
+    translat.put(300, "триста")
+    translat.put(400, "четыреста")
+    translat.put(500, "пятьсот")
+    translat.put(600, "шестьсот")
+    translat.put(700, "семьсот")
+    translat.put(800, "восемьсот")
+    translat.put(900, "девятьсот")
+    translat.put(1000, "одна тысяча")
+    translat.put(2000, "две тысячи")
+    translat.put(3000, "тысячи")
+    translat.put(5000, "тысяч")
 
     if (n >= 1000) {
         val thou = n / 1000
         if (thou < 10)
             when (thou) {
-                1 -> ans += a[1000] + " "
-                2 -> ans += a[2000] + " "
-                in 3..4 -> ans += a[thou] + " " + a[3000] + " "
-                in 5..9 -> ans += a[thou] + " " + a[5000] + " "
+                1 -> ans.append(translat.getValue(1000) + " ")
+                2 -> ans.append(translat.getValue(2000) + " ")
+                in 3..4 -> ans.append(translat.getValue(thou) + " " + translat.getValue(3000) + " ")
+                in 5..9 -> ans.append(translat.getValue(thou) + " " + translat.getValue(5000) + " ")
             }
         else {
             val hun = thou / 100 * 100
-            ans += a[hun] + " "
+            ans.append(translat.getValue(hun) + " ")
             val doz = thou % 100
             if (((doz < 20) && (doz > 9)) || (doz % 10 == 0))
-                ans += a[doz] + " " + a[5000] + " "
+                ans.append(translat.getValue(doz) + " " + translat.getValue(5000) + " ")
             else {
-                ans += a[doz / 10 * 10] + " "
+                ans.append(translat.getValue(doz / 10 * 10) + " ")
                 val uni = doz % 10
                 when (uni) {
-                    1 -> ans += a[1000] + " "
-                    2 -> ans += a[2000] + " "
-                    in 3..4 -> ans += a[uni] + " " + a[3000] + " "
-                    in 5..9 -> ans += a[uni] + " " + a[5000] + " "
+                    1 -> ans.append(translat.getValue(1000) + " ")
+                    2 -> ans.append(translat.getValue(2000) + " ")
+                    in 3..4 -> ans.append(translat.getValue(uni) + " " + translat.getValue(3000) + " ")
+                    in 5..9 -> ans.append(translat.getValue(uni) + " " + translat.getValue(5000) + " ")
                 }
             }
         }
@@ -394,12 +386,12 @@ fun russian(n: Int): String {
 
     val thou = n % 1000
     val hun = thou / 100 * 100
-    ans += a[hun] + " "
+    ans.append(translat.getValue(hun) + " ")
     val doz = thou % 100
     if (((doz < 20) && (doz > 9)) || (doz % 10 == 0))
-        ans += a[doz] + " "
+        ans.append(translat.getValue(doz) + " ")
     else
-        ans += a[doz / 10 * 10] + " " + a[doz % 10]
+        ans.append(translat.getValue(doz / 10 * 10) + " " + translat.getValue(doz % 10))
 
     var list = mutableListOf<Char>()
 
