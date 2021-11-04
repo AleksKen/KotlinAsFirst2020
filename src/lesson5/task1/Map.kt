@@ -367,14 +367,6 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
                     }
                 }
 
-    for(row in bp){
-
-        for(cell in row){
-            print("${cell.iteams} \t")
-        }
-        println()}
-
-
     var maxPrice = 0
     var ansString = ""
     for (i in 0..items.size)
