@@ -341,7 +341,7 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
     for (i in 0..treasureList.size - 1)
         items.add(Item(treasureList[i].first, treasureList[i].second.first, treasureList[i].second.second))
 
-    var bp: Array<Array<BagPack>> = Array(items.size+1, { Array(capacity+1 , { BagPack("", 0) }) })
+    var bp: Array<Array<BagPack>> = Array(items.size + 1, { Array(capacity + 1, { BagPack("", 0) }) })
 
     for (i in 0..items.size)
         for (j in 0..capacity) {
@@ -357,15 +357,18 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
                     if (items[i - 1].weight > j)
                         bp[i][j] = bp[i - 1][j]
                     else {
-                        var prev = bp[i-1][j]
-                        var form = BagPack(bp[i-1][j-items[i-1].weight].iteams+' '+items[i-1].name,items[i-1].price+bp[i-1][j-items[i-1].weight].price)
-                            if (prev.price>form.price)
-                                bp[i][j]= prev
-                            else
-                                bp[i][j]= form}
-
+                        var prev = bp[i - 1][j]
+                        var form = BagPack(
+                            bp[i - 1][j - items[i - 1].weight].iteams + ' ' + items[i - 1].name,
+                            items[i - 1].price + bp[i - 1][j - items[i - 1].weight].price
+                        )
+                        if (prev.price > form.price)
+                            bp[i][j] = prev
+                        else
+                            bp[i][j] = form
                     }
                 }
+        }
 
     var maxPrice = 0
     var ansString = ""
