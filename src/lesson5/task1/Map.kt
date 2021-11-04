@@ -377,7 +377,7 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
         var world = ""
         ansString = ansString + ' '
         for (i in 0..ansString.lastIndex) {
-            if (Character.isLetter(ansString[i]))
+            if ((Character.isLetter(ansString[i])) || (Character.isDigit(ansString[i])))
                 world += ansString[i]
             else {
                 ansGap.add(world)
