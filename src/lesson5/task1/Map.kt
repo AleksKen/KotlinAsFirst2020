@@ -3,6 +3,7 @@
 package lesson5.task1
 
 import java.util.*
+import javax.xml.stream.events.Characters
 
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
@@ -329,29 +330,67 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
  *   ) -> emptySet()
  */
 
-class treas(var name: String, var weight: Int, var price: Int)
+class Item(var name: String, var weight: Int, var price: Int)
+class BagPack(var iteams: String, var price: Int)
 
 fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
-    var copy = capacity
+    var items = mutableListOf<Item>()
     var ansGap = mutableSetOf<String>()
-    var listForSort = mutableListOf<treas>()
-    var b = treasures.toList()
-    for (i in 0..b.size - 1) {
-        listForSort.add(treas(b[i].first, b[i].second.first, b[i].second.second))
+
+    var treasureList = treasures.toList()
+    for (i in 0..treasureList.size - 1)
+        items.add(Item(treasureList[i].first, treasureList[i].second.first, treasureList[i].second.second))
+
+    var bp: Array<Array<BagPack>> = Array(items.size + 1, { Array(capacity + 1, { BagPack("", 0) }) })
+
+    for (i in 0..items.size)
+        for (j in 0..capacity) {
+            if ((i == 0) || (j == 0))
+                bp[i][j] = BagPack("", 0)
+            else
+                if (i == 1) {
+                    if (items[0].weight <= j)
+                        bp[1][j] = BagPack(items[0].name, items[0].price)
+                    else
+                        bp[1][j] = BagPack("", 0)
+                } else {
+                    if (items[i - 1].weight > j)
+                        bp[i][j] = bp[i - 1][j]
+                    else {
+                        var newPrice = items[i - 1].price + bp[i - 1][j - items[i - 1].weight].price
+                        if (bp[i - 1][j].price > newPrice)
+                            bp[i][j] = bp[i - 1][j]
+                        else
+                            bp[i][j] =
+                                BagPack(bp[i - 1][j - items[i - 1].weight].iteams + ' ' + items[i].name, newPrice)
+                    }
+                }
+        }
+    var maxPrice = 0
+    var ansString = ""
+    for (i in 0..items.size)
+        if (bp[i][capacity].price > maxPrice) {
+            maxPrice = bp[i][capacity].price
+            ansString = bp[i][capacity].iteams
+        }
+    if (ansString != "") {
+        var world = ""
+        ansString = ansString + ' '
+        for (i in 0..ansString.lastIndex) {
+            if (Character.isLetter(ansString[i]))
+                world += ansString[i]
+            else {
+                ansGap.add(world)
+                world = ""
+            }
+        }
     }
 
-    val sortedList = listForSort.sortedWith(compareByDescending <treas>
-    { it.weight }.thenByDescending { it.price })
-
-    println(b)
-
-    for (i in 0..sortedList.size - 1)
-        if (copy - sortedList[i].weight > -1) {
-            copy -= sortedList[i].weight
-            ansGap.add(sortedList[i].name)
-
-        }
-
     return ansGap
+
 }
 
+
+
+
+    
