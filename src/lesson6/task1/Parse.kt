@@ -2,7 +2,7 @@
 
 package lesson6.task1
 
-import lesson5.task1.treas
+import lesson5.task1.Item
 import javax.xml.stream.events.Characters
 
 // Урок 6: разбор строк, исключения
