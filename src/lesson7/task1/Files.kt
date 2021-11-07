@@ -613,7 +613,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
                     writer.newLine()
                     for (j in 1..(countIndent))
                         writer.write(" ")
-                    for (j in 3..countIndent+res.toString().lastIndex)
+                    for (j in 1..res.toString().length)
                         writer.write("-")
                     writer.newLine()
                     for (j in 1..(countIndent))
