@@ -650,13 +650,13 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
                     writer.write("-")
                 writer.newLine()
             } else {
-                for (j in 1..countIndent)
+                for (j in 1..countIndent+res.toString().length-deduction.toInt().toString().length-1)
                     writer.write(" ")
                 writer.write("-" + deduction.toInt().toString())
                 writer.newLine()
                 for (j in 1..countIndent)
                     writer.write(" ")
-                for (j in 1..deduction.toString().lastIndex)
+                for (j in 1..res.toString().length)
                     writer.write("-")
                 writer.newLine()
             }
