@@ -2,8 +2,10 @@
 
 package lesson7.task1
 
+import lesson10.task2.generateListHtml
 import java.io.File
-import java.lang.StringBuilder
+
+import kotlin.text.StringBuilder
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -112,23 +114,47 @@ fun sibilants(inputName: String, outputName: String) {
         ans.append(str[0])
         for (i in 1..str.lastIndex)
             when {
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ы')) -> ans.append('И')
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ы')) -> ans.append('и')
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ы')) -> ans.append(
+                    'И'
+                )
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ы')) -> ans.append(
+                    'и'
+                )
 
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ю')) -> ans.append('У')
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ю')) -> ans.append('у')
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ю')) -> ans.append(
+                    'У'
+                )
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ю')) -> ans.append(
+                    'у'
+                )
 
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Я')) -> ans.append('А')
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'я')) -> ans.append('а')
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Я')) -> ans.append(
+                    'А'
+                )
+                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'я')) -> ans.append(
+                    'а'
+                )
 
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Я')) -> ans.append('А')
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'я')) -> ans.append('а')
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Я')) -> ans.append(
+                    'А'
+                )
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'я')) -> ans.append(
+                    'а'
+                )
 
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ю')) -> ans.append('У')
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ю')) -> ans.append('у')
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ю')) -> ans.append(
+                    'У'
+                )
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ю')) -> ans.append(
+                    'у'
+                )
 
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ы')) -> ans.append('И')
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ы')) -> ans.append('и')
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ы')) -> ans.append(
+                    'И'
+                )
+                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ы')) -> ans.append(
+                    'и'
+                )
 
 
                 else -> ans.append(str[i])
@@ -158,7 +184,9 @@ fun sibilants(inputName: String, outputName: String) {
  * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых)
  *
  */
-fun centerFile(inputName: String, outputName: String) { TODO()}
+fun centerFile(inputName: String, outputName: String) {
+    TODO()
+}
 
 /**
  * Сложная (20 баллов)
@@ -493,6 +521,116 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
  *
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    TODO()
+    var writer = File(outputName).bufferedWriter()
+
+    var str1 = StringBuilder(" " + lhv.toString() + " | ")
+    val countCharStr1 = str1.toString().length
+    str1.append(rhv.toString())
+
+    writer.write(str1.toString())
+
+    var whatCanBeDivided = StringBuilder()
+
+    var index = 0
+    for (i in 0..lhv.toString().lastIndex) {
+        whatCanBeDivided.append(lhv.toString()[i])
+        var num = (whatCanBeDivided.toString().toInt()) / rhv
+        if (Math.ceil(num.toDouble()) > 0) {
+            index = i + 1
+            break
+        }
+    }
+
+    var deduction = (Math.ceil((whatCanBeDivided.toString().toInt() / rhv).toDouble())) * rhv
+    var str2 = StringBuilder('-' + deduction.toInt().toString())
+    var countCharStr2 = str2.toString().length
+    val n = countCharStr1 - countCharStr2
+    for (i in 1..n)
+        str2.append(' ')
+    str2.append((Math.floor((lhv / rhv).toDouble())).toInt())
+    writer.newLine()
+    writer.write(str2.toString())
+    writer.newLine()
+
+
+    for (i in 1..deduction.toString().lastIndex)
+        writer.write("-")
+    writer.newLine()
+
+    var res = StringBuilder((whatCanBeDivided.toString().toInt() - deduction.toInt()).toString())
+    var countIndent = 1
+
+    for (i in index..lhv.toString().length) {
+
+        if (i > lhv.toString().lastIndex){
+            res = StringBuilder((whatCanBeDivided.toString().toInt() - deduction.toInt()).toString())
+            countIndent += whatCanBeDivided.toString().length + 1 - res.toString().length
+            for (j in 2..countIndent)
+                writer.write(" ")
+
+            writer.write(res.toString())
+            break
+        }
+
+        res = StringBuilder((whatCanBeDivided.toString().toInt() - deduction.toInt()).toString())
+
+        if (lhv>=rhv)
+            res.append(lhv.toString()[i])
+
+        countIndent += whatCanBeDivided.toString().length + 1 - res.toString().length
+
+        if ((res.toString() == "0") && (i > lhv.toString().lastIndex)) {
+            for (j in 1..(countIndent))
+                writer.write(" ")
+            writer.write(res.toString())
+            break
+        } else {
+
+            if ((res.toString().toInt() < rhv) && (i == lhv.toString().lastIndex)) {
+                for (j in 2..(countIndent))
+                    writer.write(" ")
+                writer.write(res.toString())
+                break
+            }
+
+            whatCanBeDivided.setLength(0)
+            whatCanBeDivided.append(res)
+            deduction = (Math.ceil((whatCanBeDivided.toString().toInt() / rhv).toDouble())) * rhv
+
+            for (j in 1..countIndent)
+                writer.write(" ")
+            writer.write(whatCanBeDivided.toString())
+            writer.newLine()
+
+
+
+            if (whatCanBeDivided.toString().length==deduction.toInt().toString().length) {
+            for (j in 2..countIndent)
+                writer.write(" ")
+            writer.write("-" + deduction.toInt().toString())
+            writer.newLine()
+            for (j in 2..countIndent)
+                writer.write(" ")
+            for (j in 2..deduction.toString().length)
+                writer.write("-")
+            writer.newLine()
+        }
+            else {
+                for (j in 1..countIndent)
+                    writer.write(" ")
+                writer.write("-" + deduction.toInt().toString())
+                writer.newLine()
+                for (j in 1..countIndent)
+                    writer.write(" ")
+                for (j in 1..deduction.toString().lastIndex)
+                    writer.write("-")
+                writer.newLine()
+            }}
+    }
+
+
+
+    writer.close()
 }
+
 
