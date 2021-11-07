@@ -562,7 +562,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
 
     for (i in index..lhv.toString().length) {
 
-        if (i > lhv.toString().lastIndex){
+        if (i > lhv.toString().lastIndex) {
 
             res = StringBuilder((whatCanBeDivided.toString().toInt() - deduction.toInt()).toString())
             countIndent += whatCanBeDivided.toString().length + 1 - res.toString().length
@@ -575,7 +575,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
 
         res = StringBuilder((whatCanBeDivided.toString().toInt() - deduction.toInt()).toString())
 
-        if (lhv>=rhv)
+        if (lhv >= rhv)
             res.append(lhv.toString()[i])
 
 
@@ -602,10 +602,30 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         } else {
 
             if ((res.toString().toInt() < rhv) && (i == lhv.toString().lastIndex)) {
+                if (res.toString().toInt()!=lhv){
+                    for (j in 1..(countIndent))
+                        writer.write(" ")
+                    writer.write(res.toString())
+                    writer.newLine()
+                    for (j in 2..(countIndent+res.toString().lastIndex))
+                        writer.write(" ")
+                    writer.write("-0")
+                    writer.newLine()
+                    for (j in 1..(countIndent))
+                        writer.write(" ")
+                    for (j in 2..countIndent+res.toString().lastIndex)
+                        writer.write("-")
+                    writer.newLine()
+                    for (j in 1..(countIndent))
+                        writer.write(" ")
+                    writer.write(res.toString())
+                    break}
+                    else{
+
                 for (j in 2..(countIndent))
                     writer.write(" ")
                 writer.write(res.toString())
-                break
+                break}
             }
 
             whatCanBeDivided.setLength(0)
@@ -619,18 +639,17 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
 
 
 
-            if (whatCanBeDivided.toString().length==deduction.toInt().toString().length) {
-            for (j in 2..countIndent)
-                writer.write(" ")
-            writer.write("-" + deduction.toInt().toString())
-            writer.newLine()
-            for (j in 2..countIndent)
-                writer.write(" ")
-            for (j in 2..deduction.toString().length)
-                writer.write("-")
-            writer.newLine()
-        }
-            else {
+            if (whatCanBeDivided.toString().length == deduction.toInt().toString().length) {
+                for (j in 2..countIndent)
+                    writer.write(" ")
+                writer.write("-" + deduction.toInt().toString())
+                writer.newLine()
+                for (j in 2..countIndent)
+                    writer.write(" ")
+                for (j in 2..deduction.toString().length)
+                    writer.write("-")
+                writer.newLine()
+            } else {
                 for (j in 1..countIndent)
                     writer.write(" ")
                 writer.write("-" + deduction.toInt().toString())
@@ -640,7 +659,8 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
                 for (j in 1..deduction.toString().lastIndex)
                     writer.write("-")
                 writer.newLine()
-            }}
+            }
+        }
     }
 
 
