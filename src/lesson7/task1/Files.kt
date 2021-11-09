@@ -582,8 +582,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     var res = StringBuilder((whatCanBeDivided.toString().toInt() - deduction.toInt()).toString())
     var countIndent = 1
 
-    val idealDed = deduction.toInt()
-    val idealW = whatCanBeDivided.toString().toInt()
+    var k= 0
 
     for (i in index..lhv.toString().length) {
 
@@ -611,8 +610,9 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             break
         }
 
+        k+=1
 
-        if (((whatCanBeDivided.toString().toInt()==idealW) && (deduction.toInt()==idealDed)))
+        if (k==1)
             if (deduction.toInt().toString().length+1<=whatCanBeDivided.toString().length)
                 countIndent += whatCanBeDivided.toString().length  - res.toString().length
             else
