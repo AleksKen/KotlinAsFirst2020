@@ -572,8 +572,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         writer.newLine()
         writer.write(str2.toString())
         writer.newLine()
-        for (i in 1..whatCanBeDivided.toString().length - (deduction.toInt().toString().length+1))
-        writer.write(" ")
+
         for (i in 1..whatCanBeDivided.toString().length)
             writer.write("-")
         writer.newLine()
@@ -604,7 +603,10 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             res.append(lhv.toString()[i])
 
         if (lhv<rhv){
-            writer.write(" "+lhv.toString())
+            if (lhv.toString().length>2)
+                writer.write(lhv.toString())
+            else
+                writer.write(" "+lhv.toString())
             break
         }
 
