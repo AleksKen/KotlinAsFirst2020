@@ -249,19 +249,10 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  */
 fun roman(n: Int): String {
     var num = n
-    var translat = mutableMapOf(1 to "I")
-    translat.put(4, "IV")
-    translat.put(5, "V")
-    translat.put(9, "IX")
-    translat.put(10, "X")
-    translat.put(40, "XL")
-    translat.put(50, "L")
-    translat.put(90, "XC")
-    translat.put(100, "C")
-    translat.put(400, "CD")
-    translat.put(500, "D")
-    translat.put(900, "CM")
-    translat.put(1000, "M")
+    val translat = mapOf(
+        1 to "I", 4 to "IV", 5 to "V", 9 to "IX", 10 to "X", 40 to "XL", 50 to "L",
+        90 to "XC", 100 to "C", 400 to "CD", 500 to "D", 900 to "CM", 1000 to "M"
+    )
 
     var ans = StringBuilder()
     if (num >= 1000)
@@ -313,48 +304,14 @@ fun roman(n: Int): String {
  */
 fun russian(n: Int): String {
     var ans = StringBuilder()
-
-    var translat = mutableMapOf(0 to "")
-    translat.put(1, "один")
-    translat.put(2, "два")
-    translat.put(3, "три")
-    translat.put(4, "четыре")
-    translat.put(5, "пять")
-    translat.put(6, "шесть")
-    translat.put(7, "семь")
-    translat.put(8, "восемь")
-    translat.put(9, "девять")
-    translat.put(10, "десять")
-    translat.put(11, "одиннадцать")
-    translat.put(12, "двенадцать")
-    translat.put(13, "тринадцать")
-    translat.put(14, "четырнадцать")
-    translat.put(15, "пятнадцать")
-    translat.put(16, "шестнадцать")
-    translat.put(17, "семнадцать")
-    translat.put(18, "восемнадцать")
-    translat.put(19, "девятнадцать")
-    translat.put(20, "двадцать")
-    translat.put(30, "тридцать")
-    translat.put(40, "сорок")
-    translat.put(50, "пятьдесят")
-    translat.put(60, "шестьдесят")
-    translat.put(70, "семьдесят")
-    translat.put(80, "восемьдесят")
-    translat.put(90, "девяносто")
-    translat.put(100, "сто")
-    translat.put(200, "двести")
-    translat.put(300, "триста")
-    translat.put(400, "четыреста")
-    translat.put(500, "пятьсот")
-    translat.put(600, "шестьсот")
-    translat.put(700, "семьсот")
-    translat.put(800, "восемьсот")
-    translat.put(900, "девятьсот")
-    translat.put(1000, "одна тысяча")
-    translat.put(2000, "две тысячи")
-    translat.put(3000, "тысячи")
-    translat.put(5000, "тысяч")
+    var translat = mapOf(0 to "", 1 to "один", 2 to "два", 3 to "три", 4 to "четыре", 5 to "пять", 6 to "шесть",
+        7 to "семь", 8 to "восемь", 9 to "девять", 10 to "десять", 11 to "одиннадцать", 12 to "двенадцать",
+        13 to "тринадцать", 14 to "четырнадцать", 15 to "пятнадцать", 16 to "шестнадцать", 17 to "семнадцать",
+        18 to "восемнадцать", 19 to "девятнадцать", 20 to "двадцать", 30 to "тридцать", 40 to "сорок",
+        50 to "пятьдесят", 60 to "шестьдесят", 70 to "семьдесят", 80 to "восемьдесят", 90 to "девяносто",
+        100 to "сто", 200 to "двести", 300 to "триста", 400 to "четыреста", 500 to "пятьсот", 600 to "шестьсот",
+        700 to "семьсот", 800 to "восемьсот", 900 to "девятьсот", 1000 to "одна тысяча", 2000 to "две тысячи",
+        3000 to "тысячи", 5000 to "тысяч")
 
     if (n >= 1000) {
         val thou = n / 1000

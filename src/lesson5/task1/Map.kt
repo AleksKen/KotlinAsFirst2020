@@ -281,30 +281,15 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    var copyList = list.toMutableList()
-    var copy: MutableList<Int> = copyList
-    var ans: Pair<Int, Int> = Pair(-1, -1)
-    var searchPair: Pair<Int, Int> = Pair(-1, -1)
-    copy.sort()
-
-    for (i in 0..copy.size - 1) {
-        val searchObject = number - copy[i]
-        if (copy.binarySearch(searchObject) > -1) {
-            searchPair = Pair(copy[i], searchObject)
+    var numAndIndex = mutableMapOf<Int, Int>()
+    for (i in 0..list.lastIndex) {
+        if (numAndIndex.containsKey(number - list[i])) {
+            return Pair(numAndIndex.getValue(number - list[i]), i)
             break
-        }
+        } else
+            numAndIndex.put(list[i], i)
     }
-
-    if ((searchPair.first != -1) && (searchPair.second != -1))
-        for (i in 0..list.size - 1) {
-            if ((list[i] == searchPair.first) && (ans.first == -1))
-                ans = Pair(i, ans.second)
-            if ((list[i] == searchPair.second) && (ans.first != i))
-                ans = Pair(ans.first, i)
-        }
-    if ((ans.first == -1) || (ans.second == -1))
-        ans = Pair(-1, -1)
-    return ans
+    return Pair(-1, -1)
 }
 
 
