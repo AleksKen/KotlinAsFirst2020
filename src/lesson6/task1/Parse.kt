@@ -131,31 +131,19 @@ fun bestLongJump(jumps: String): Int = TODO()
  * вернуть -1.
  */
 
+fun check(num: String): Boolean {
+    for (i in 0..num.lastIndex)
+        if (!(Character.isDigit(num[i])))
+            return false
+    return true
+}
 
 fun bestHighJump(jumps: String): Int {
-    var highAttempt = mutableListOf<Pair<Int, String>>()
-    var num = 0
-    var jumpsStr = jumps + ' '
-    var str = StringBuilder()
-    for (i in 0..jumpsStr.length - 1) {
-        if (Character.isDigit(jumpsStr[i])) {
-            var a = Character.getNumericValue(jumpsStr[i])
-            num = num * 10 + a
-        } else
-            if (jumpsStr[i] != ' ')
-                str.append(jumpsStr[i])
-
-        if ((str.toString() != "") && (num != 0) && (jumpsStr[i] == ' ')) {
-            highAttempt.add(Pair(num, str.toString()))
-            num = 0
-            str.setLength(0)
-        }
-    }
+    var highAttempt = jumps.split(" ")
     var ans = -1
-    for (i in 0..highAttempt.lastIndex)
-        for (j in 0..highAttempt[i].second.length - 1)
-            if ((highAttempt[i].second[j] == '+') && (highAttempt[i].first > ans))
-                ans = highAttempt[i].first
+    for (i in 0..highAttempt.lastIndex step 2)
+        if ((check(highAttempt[i])) && (highAttempt[i + 1].contains('+')))
+            ans = Math.max(ans, highAttempt[i].toInt())
     return ans
 }
 
@@ -186,7 +174,7 @@ fun firstDuplicateIndex(str: String): Int {
     var listWords = mutableListOf<String>()
     var word = StringBuilder()
     for (i in 0..useStr.lastIndex)
-        if (useStr[i]!=' ')
+        if (useStr[i] != ' ')
             word.append(useStr[i])
         else {
             listWords.add(word.toString())
