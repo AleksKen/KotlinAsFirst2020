@@ -522,13 +522,6 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     var writer = File(outputName).bufferedWriter()
-
-    var str1 = StringBuilder(" " + lhv.toString() + " | ")
-    val countCharStr1 = str1.toString().length
-    str1.append(rhv.toString())
-
-    writer.write(str1.toString())
-
     var whatCanBeDivided = StringBuilder()
 
     var index = 0
@@ -540,8 +533,19 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             break
         }
     }
-
     var deduction = (Math.ceil((whatCanBeDivided.toString().toInt() / rhv).toDouble())) * rhv
+    var str1 = StringBuilder()
+
+
+    if (deduction.toInt().toString().length+1<=whatCanBeDivided.toString().length)
+         str1.append( lhv.toString() + " | ")
+    else
+         str1.append(" "+ lhv.toString() + " | ")
+
+    val countCharStr1 = str1.toString().length
+    str1.append(rhv.toString())
+    writer.write(str1.toString())
+
     if (whatCanBeDivided.toString().length == deduction.toInt().toString().length) {
         var str2 = StringBuilder('-' + deduction.toInt().toString())
         var countCharStr2 = str2.toString().length
@@ -557,7 +561,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         writer.newLine()
     } else {
         var str2 = StringBuilder()
-        for (i in 1..whatCanBeDivided.toString().length - deduction.toInt().toString().length)
+        for (i in 1..whatCanBeDivided.toString().length - (deduction.toInt().toString().length+1))
             str2.append(" ")
         str2.append("-" + deduction.toInt().toString())
         var countCharStr2 = str2.toString().length
@@ -568,6 +572,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         writer.newLine()
         writer.write(str2.toString())
         writer.newLine()
+        for (i in 1..whatCanBeDivided.toString().length - (deduction.toInt().toString().length+1))
         writer.write(" ")
         for (i in 1..whatCanBeDivided.toString().length)
             writer.write("-")
@@ -601,8 +606,13 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             break
         }
 
-
-        countIndent += whatCanBeDivided.toString().length + 1 - res.toString().length
+        if (lhv.toString().contains(whatCanBeDivided))
+            if (deduction.toInt().toString().length+1<=whatCanBeDivided.toString().length)
+                countIndent += whatCanBeDivided.toString().length  - res.toString().length
+            else
+                countIndent += whatCanBeDivided.toString().length  +1 - res.toString().length
+        else
+            countIndent += whatCanBeDivided.toString().length  +1 - res.toString().length
 
         if ((res.toString().toInt() == 0) && (i >= lhv.toString().lastIndex)) {
             for (j in 1..(countIndent))
