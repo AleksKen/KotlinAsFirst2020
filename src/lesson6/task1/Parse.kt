@@ -171,15 +171,7 @@ fun plusMinus(expression: String): Int = TODO()
 fun firstDuplicateIndex(str: String): Int {
     var useStr = str + ' '
     var ans = -1
-    var listWords = mutableListOf<String>()
-    var word = StringBuilder()
-    for (i in 0..useStr.lastIndex)
-        if (useStr[i] != ' ')
-            word.append(useStr[i])
-        else {
-            listWords.add(word.toString())
-            word.setLength(0)
-        }
+    var listWords = str.split(" ")
     for (i in 0..listWords.lastIndex - 1) {
         if ((listWords[i].toLowerCase()) == (listWords[i + 1].toLowerCase())) {
             ans += 1
@@ -203,7 +195,6 @@ fun firstDuplicateIndex(str: String): Int {
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-class shop(var name: String, var price: Double)
 
 fun mostExpensive(description: String): String {
     TODO()
