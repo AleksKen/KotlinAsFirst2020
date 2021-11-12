@@ -114,48 +114,23 @@ fun sibilants(inputName: String, outputName: String) {
         ans.append(str[0])
         for (i in 1..str.lastIndex)
             when {
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ы')) -> ans.append(
-                    'И'
-                )
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ы')) -> ans.append(
-                    'и'
-                )
+                (("жш".contains(str[i - 1].toLowerCase()))  && (str[i] == 'Ы')) -> ans.append('И')
+                (("жш".contains(str[i - 1].toLowerCase())) && (str[i] == 'ы')) -> ans.append('и')
 
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Ю')) -> ans.append(
-                    'У'
-                )
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'ю')) -> ans.append(
-                    'у'
-                )
+                (("жш".contains(str[i - 1].toLowerCase())) && (str[i] == 'Ю')) -> ans.append('У')
+                (("жш".contains(str[i - 1].toLowerCase())) && (str[i] == 'ю')) -> ans.append('у')
 
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'Я')) -> ans.append(
-                    'А'
-                )
-                (((str[i - 1] == 'Ж') || (str[i - 1] == 'ж') || (str[i - 1] == 'Ш') || (str[i - 1] == 'ш')) && (str[i] == 'я')) -> ans.append(
-                    'а'
-                )
+                (("жш".contains(str[i - 1].toLowerCase())) && (str[i] == 'Я')) -> ans.append('А')
+                (("жш".contains(str[i - 1].toLowerCase())) && (str[i] == 'я')) -> ans.append('а')
 
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Я')) -> ans.append(
-                    'А'
-                )
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'я')) -> ans.append(
-                    'а'
-                )
+                (("чщ".contains(str[i - 1].toLowerCase())) && (str[i] == 'Я')) -> ans.append('А')
+                (("чщ".contains(str[i - 1].toLowerCase())) && (str[i] == 'я')) -> ans.append('а')
 
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ю')) -> ans.append(
-                    'У'
-                )
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ю')) -> ans.append(
-                    'у'
-                )
+                (("чщ".contains(str[i - 1].toLowerCase())) && (str[i] == 'Ю')) -> ans.append('У')
+                (("чщ".contains(str[i - 1].toLowerCase())) && (str[i] == 'ю')) -> ans.append('у')
 
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'Ы')) -> ans.append(
-                    'И'
-                )
-                (((str[i - 1] == 'Ч') || (str[i - 1] == 'ч') || (str[i - 1] == 'Щ') || (str[i - 1] == 'щ')) && (str[i] == 'ы')) -> ans.append(
-                    'и'
-                )
-
+                (("чщ".contains(str[i - 1].toLowerCase())) && (str[i] == 'Ы')) -> ans.append('И')
+                (("чщ".contains(str[i - 1].toLowerCase())) && (str[i] == 'ы')) -> ans.append('и')
 
                 else -> ans.append(str[i])
             }
