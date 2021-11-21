@@ -563,8 +563,13 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         if (i > lhv.toString().lastIndex) {
             res = StringBuilder((whatCanBeDivided.toString().toInt() - deduction.toInt()).toString())
             countIndent += whatCanBeDivided.toString().length + 1 - res.toString().length
-            for (j in 2..countIndent)
-                writer.write(" ")
+            if (k>0)
+                for (j in 2..countIndent)
+                    writer.write(" ")
+            else
+                for (j in 3..countIndent)
+                    writer.write(" ")
+
             writer.write(res.toString())
             break
         }
