@@ -559,6 +559,13 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     var k = 0
 
     for (i in index..lhv.toString().length) {
+        if (lhv==rhv){
+            for (i in 1 .. lhv.toString().length)
+                writer.write(" ")
+            writer.write("0")
+            break
+        }
+
 
         if (i > lhv.toString().lastIndex) {
             res = StringBuilder((whatCanBeDivided.toString().toInt() - deduction.toInt()).toString())
@@ -576,8 +583,11 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
 
         res = StringBuilder((whatCanBeDivided.toString().toInt() - deduction.toInt()).toString())
 
+
+
         if (lhv >= rhv)
             res.append(lhv.toString()[i])
+
 
         if (lhv < rhv) {
             if (lhv.toString().length >= 2)
