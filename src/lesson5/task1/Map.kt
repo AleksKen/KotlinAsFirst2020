@@ -336,43 +336,34 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
                 if (items[0].weight <= j)
                     bp[1][j] = BagPack(items[0].name, items[0].price)
                 else
-                    bp[1][j] = BagPack("", 0)}
-                else { if (items[i - 1].weight > j)
+                    bp[1][j] = BagPack("", 0)
+            } else {
+                if (items[i - 1].weight > j)
                     bp[i][j] = bp[i - 1][j]
                 else {
                     var prev = bp[i - 1][j]
                     var form = BagPack(
-                            bp[i - 1][j - items[i - 1].weight].iteams + ' ' + items[i - 1].name,
-                            items[i - 1].price + bp[i - 1][j - items[i - 1].weight].price)
+                        bp[i - 1][j - items[i - 1].weight].iteams + ' ' + items[i - 1].name,
+                        items[i - 1].price + bp[i - 1][j - items[i - 1].weight].price
+                    )
                     if (prev.price > form.price)
                         bp[i][j] = prev
                     else
                         bp[i][j] = form
-                    }
                 }
+            }
         }
 
     var maxPrice = 0
-    var ansString = ""
+    var ansList = listOf<String>()
     for (i in 0..items.size)
         if (bp[i][capacity].price > maxPrice) {
             maxPrice = bp[i][capacity].price
-            ansString = bp[i][capacity].iteams
+            ansList = (bp[i][capacity].iteams).split(" ")
+
         }
 
-    if (ansString != "") {
-        var world = ""
-        ansString = ansString + ' '
-        for (i in 0..ansString.lastIndex) {
-            if ((Character.isLetter(ansString[i])) || (Character.isDigit(ansString[i])))
-                world += ansString[i]
-            else {
-                ansGap.add(world)
-                world = ""
-            }
-        }
-    }
-    return ansGap
+    return ansList.toSet()
 }
 
 
