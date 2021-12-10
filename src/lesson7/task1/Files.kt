@@ -114,7 +114,7 @@ fun sibilants(inputName: String, outputName: String) {
         ans.append(str[0])
         for (i in 1..str.lastIndex)
             when {
-                (("жш".contains(str[i - 1].toLowerCase()))  && (str[i] == 'Ы')) -> ans.append('И')
+                (("жш".contains(str[i - 1].toLowerCase())) && (str[i] == 'Ы')) -> ans.append('И')
                 (("жш".contains(str[i - 1].toLowerCase())) && (str[i] == 'ы')) -> ans.append('и')
 
                 (("жш".contains(str[i - 1].toLowerCase())) && (str[i] == 'Ю')) -> ans.append('У')
@@ -329,8 +329,98 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
-    TODO()
+    var steck = mutableListOf<String>("</html>", "</body>", "</p>")
+    var writer = File(outputName).bufferedWriter()
+    var ans = StringBuilder()
+    writer.write("<html>")
+    writer.newLine()
+    writer.write("<body>")
+    writer.newLine()
+    writer.write("<p>")
+    writer.newLine()
+    var flagB = 0
+    var flagI = 0
+    var flagS = 0
+    var flagBI = 0
+    for (line in File(inputName).readLines()) {
+        if (line.isEmpty())
+            writer.write("</p><p>")
+        for (i in 0..line.lastIndex) {
+            if ((line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI == 0)) {
+                if ((flagB == 0) && (flagI == 0)) {
+                    writer.write("<b><i>")
+                    steck.add("</b>")
+                    steck.add("</i>")
+                    flagBI += 1
+                    continue
+                }
+                if ((flagB != 0) && (flagI != 0)) {
+                    writer.write(steck[steck.lastIndex])
+                    writer.write(steck[steck.lastIndex - 1])
+                    steck.removeAt(steck.lastIndex)
+                    steck.removeAt(steck.lastIndex)
+                    flagB = 0
+                    flagI = 0
+                    continue
+                }
+            }
+
+            if ((i != 0) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB == 0)) {
+                writer.write("<b>")
+                steck.add("</b>")
+                flagB += 1
+                continue
+            }
+            if ((i != 0) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI == 0)) {
+                writer.write("<i>")
+                steck.add("</i>")
+                flagI += 1
+                continue
+            }
+            if ((line[i] == '~') && (line[i + 1] == '~') && (flagS == 0)) {
+                writer.write("<s>")
+                steck.add("</s>")
+                flagS += 1
+                continue
+            }
+            if ((line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI != 0)) {
+                writer.write(steck[steck.lastIndex])
+                writer.write(steck[steck.lastIndex - 1])
+                steck.removeAt(steck.lastIndex)
+                steck.removeAt(steck.lastIndex)
+                flagBI = 0
+                continue
+            }
+            if ((i != 0) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB != 0)) {
+                writer.write(steck[steck.lastIndex])
+                steck.removeAt(steck.lastIndex)
+                flagB = 0
+                continue
+            }
+            if ((i != 0) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI != 0)) {
+                writer.write(steck[steck.lastIndex])
+                steck.removeAt(steck.lastIndex)
+                flagI = 0
+                continue
+            }
+            if ((line[i] == '~') && (line[i + 1] == '~') && (flagS != 0)) {
+                writer.write(steck[steck.lastIndex])
+                steck.removeAt(steck.lastIndex)
+                flagS = 0
+                continue
+            }
+            if ((line[i] != '*') && (line[i] != '~'))
+                writer.write(line[i].toString())
+        }
+    }
+    writer.write("</p>")
+    writer.newLine()
+    writer.write("</body>")
+    writer.newLine()
+    writer.write("</html>")
+    writer.close()
 }
+
 
 /**
  * Сложная (23 балла)
@@ -559,8 +649,8 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     var k = 0
 
     for (i in index..lhv.toString().length) {
-        if (lhv==rhv){
-            for (i in 1 .. lhv.toString().length)
+        if (lhv == rhv) {
+            for (i in 1..lhv.toString().length)
                 writer.write(" ")
             writer.write("0")
             break
@@ -570,7 +660,9 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         if (i > lhv.toString().lastIndex) {
             res = StringBuilder((whatCanBeDivided.toString().toInt() - deduction.toInt()).toString())
             countIndent += whatCanBeDivided.toString().length + 1 - res.toString().length
-            if ((k==0) && (lhv.toString().length>(rhv*Math.floor((lhv/rhv).toDouble())).toInt().toString().length))
+            if ((k == 0) && (lhv.toString().length > (rhv * Math.floor((lhv / rhv).toDouble())).toInt()
+                    .toString().length)
+            )
                 for (j in 3..countIndent)
                     writer.write(" ")
             else
