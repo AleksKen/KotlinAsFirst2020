@@ -346,7 +346,7 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
         if (line.isEmpty())
             writer.write("</p><p>")
         for (i in 0..line.lastIndex) {
-            if ((line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI == 0)) {
+            if ((i <= line.lastIndex-2) && (line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI == 0)) {
                 if ((flagB == 0) && (flagI == 0)) {
                     writer.write("<b><i>")
                     steck.add("</b>")
@@ -365,25 +365,25 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
                 }
             }
 
-            if ((i != 0) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB == 0)) {
+            if ((i != 0) && (i <= line.lastIndex-2) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB == 0)) {
                 writer.write("<b>")
                 steck.add("</b>")
                 flagB += 1
                 continue
             }
-            if ((i != 0) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI == 0)) {
+            if ((i != 0) && (i <= line.lastIndex-1) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI == 0)) {
                 writer.write("<i>")
                 steck.add("</i>")
                 flagI += 1
                 continue
             }
-            if ((line[i] == '~') && (line[i + 1] == '~') && (flagS == 0)) {
+            if ((i <= line.lastIndex-1) && (line[i] == '~') && (line[i + 1] == '~') && (flagS == 0)) {
                 writer.write("<s>")
                 steck.add("</s>")
                 flagS += 1
                 continue
             }
-            if ((line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI != 0)) {
+            if ((i <= line.lastIndex-2) && (line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI != 0)) {
                 writer.write(steck[steck.lastIndex])
                 writer.write(steck[steck.lastIndex - 1])
                 steck.removeAt(steck.lastIndex)
@@ -391,19 +391,19 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
                 flagBI = 0
                 continue
             }
-            if ((i != 0) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB != 0)) {
+            if ((i != 0) && (i <= line.lastIndex-2) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB != 0)) {
                 writer.write(steck[steck.lastIndex])
                 steck.removeAt(steck.lastIndex)
                 flagB = 0
                 continue
             }
-            if ((i != 0) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI != 0)) {
+            if ((i != 0) && (i <= line.lastIndex-1) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI != 0)) {
                 writer.write(steck[steck.lastIndex])
                 steck.removeAt(steck.lastIndex)
                 flagI = 0
                 continue
             }
-            if ((line[i] == '~') && (line[i + 1] == '~') && (flagS != 0)) {
+            if ((i <= line.lastIndex-1) && (line[i] == '~') && (line[i + 1] == '~') && (flagS != 0)) {
                 writer.write(steck[steck.lastIndex])
                 steck.removeAt(steck.lastIndex)
                 flagS = 0
