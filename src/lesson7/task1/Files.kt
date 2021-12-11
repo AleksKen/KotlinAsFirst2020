@@ -202,13 +202,22 @@ fun alignFileByWidth(inputName: String, outputName: String) {
     var maxLen = 0
     for (line in File(inputName).readLines()) {
         var strForHelp = "  " + line
-        var lstStr = strForHelp.split(Regex(""" +"""))
+        var listSplit = strForHelp.split(Regex(""" +"""))
+        var lstStr = mutableListOf<String>()
+        lstStr = listSplit.toMutableList()
+        if (lstStr[lstStr.lastIndex] == "")
+            lstStr.removeAt(lstStr.lastIndex)
         maxLen = Math.max(maxLen, countLen(lstStr) + lstStr.size - 2)
     }
 
     for (line in File(inputName).readLines()) {
         var strForHelp = "  " + line
-        var lstStr = strForHelp.split(Regex(""" +"""))
+        var listSplit = strForHelp.split(Regex(""" +"""))
+        var lstStr = mutableListOf<String>()
+        lstStr = listSplit.toMutableList()
+        if (lstStr[lstStr.lastIndex] == "")
+            lstStr.removeAt(lstStr.lastIndex)
+
         if ((!(line.isEmpty())) && (lstStr.size > 2)) {
             if (countLen(lstStr) + lstStr.size - 2 < maxLen) {
                 writer.write(lstStr[1])
