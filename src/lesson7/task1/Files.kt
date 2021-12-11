@@ -190,8 +190,53 @@ fun centerFile(inputName: String, outputName: String) {
  * 7) В самой длинной строке каждая пара соседних слов должна быть отделена В ТОЧНОСТИ одним пробелом
  * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
  */
+fun countLen(lst: List<String>): Int {
+    var len = 0
+    for (i in 0..lst.lastIndex)
+        len += lst[i].length
+    return len
+}
+
 fun alignFileByWidth(inputName: String, outputName: String) {
-    TODO()
+    var writer = File(outputName).bufferedWriter()
+    var maxLen = 0
+    for (line in File(inputName).readLines()) {
+        var lstStr = line.split(Regex(""" +"""))
+        maxLen = Math.max(maxLen, countLen(lstStr) + lstStr.size - 2)
+    }
+
+    for (line in File(inputName).readLines()) {
+        var lstStr = line.split(Regex(""" +"""))
+        if ((!(line.isEmpty())) && (lstStr.size > 2)) {
+            if (countLen(lstStr) + lstStr.size - 2 < maxLen) {
+                writer.write(lstStr[1])
+                var countSpace = maxLen - (countLen(lstStr) + lstStr.size - 2)
+                var inOnePass = (Math.floor((countSpace / (lstStr.size - 2)).toDouble())).toInt()
+                var remain = countSpace % (lstStr.size - 2)
+                for (i in 2..lstStr.lastIndex) {
+                    if (remain > 0) {
+                        for (j in 1..(inOnePass + 1 + 1))
+                            writer.write(" ")
+                        remain -= 1
+                    } else {
+                        for (j in 1..(inOnePass + 1))
+                            writer.write(" ")
+                    }
+                    writer.write(lstStr[i])
+                }
+            } else {
+                writer.write(lstStr[1])
+                for (i in 2..lstStr.lastIndex) {
+                    writer.write(" ")
+                    writer.write(lstStr[i])
+                }
+            }
+        }
+        if (lstStr.size == 2)
+            writer.write(lstStr[1])
+        writer.newLine()
+    }
+    writer.close()
 }
 
 /**
@@ -346,7 +391,7 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
         if (line.isEmpty())
             writer.write("</p><p>")
         for (i in 0..line.lastIndex) {
-            if ((i <= line.lastIndex-2) && (line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI == 0)) {
+            if ((i <= line.lastIndex - 2) && (line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI == 0)) {
                 if ((flagB == 0) && (flagI == 0)) {
                     writer.write("<b><i>")
                     steck.add("</b>")
@@ -365,25 +410,25 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
                 }
             }
 
-            if ((i != 0) && (i <= line.lastIndex-2) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB == 0)) {
+            if ((i != 0) && (i <= line.lastIndex - 2) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB == 0)) {
                 writer.write("<b>")
                 steck.add("</b>")
                 flagB += 1
                 continue
             }
-            if ((i != 0) && (i <= line.lastIndex-1) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI == 0)) {
+            if ((i != 0) && (i <= line.lastIndex - 1) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI == 0)) {
                 writer.write("<i>")
                 steck.add("</i>")
                 flagI += 1
                 continue
             }
-            if ((i <= line.lastIndex-1) && (line[i] == '~') && (line[i + 1] == '~') && (flagS == 0)) {
+            if ((i <= line.lastIndex - 1) && (line[i] == '~') && (line[i + 1] == '~') && (flagS == 0)) {
                 writer.write("<s>")
                 steck.add("</s>")
                 flagS += 1
                 continue
             }
-            if ((i <= line.lastIndex-2) && (line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI != 0)) {
+            if ((i <= line.lastIndex - 2) && (line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI != 0)) {
                 writer.write(steck[steck.lastIndex])
                 writer.write(steck[steck.lastIndex - 1])
                 steck.removeAt(steck.lastIndex)
@@ -391,19 +436,19 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
                 flagBI = 0
                 continue
             }
-            if ((i != 0) && (i <= line.lastIndex-2) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB != 0)) {
+            if ((i != 0) && (i <= line.lastIndex - 2) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB != 0)) {
                 writer.write(steck[steck.lastIndex])
                 steck.removeAt(steck.lastIndex)
                 flagB = 0
                 continue
             }
-            if ((i != 0) && (i <= line.lastIndex-1) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI != 0)) {
+            if ((i != 0) && (i <= line.lastIndex - 1) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI != 0)) {
                 writer.write(steck[steck.lastIndex])
                 steck.removeAt(steck.lastIndex)
                 flagI = 0
                 continue
             }
-            if ((i <= line.lastIndex-1) && (line[i] == '~') && (line[i + 1] == '~') && (flagS != 0)) {
+            if ((i <= line.lastIndex - 1) && (line[i] == '~') && (line[i + 1] == '~') && (flagS != 0)) {
                 writer.write(steck[steck.lastIndex])
                 steck.removeAt(steck.lastIndex)
                 flagS = 0
@@ -532,7 +577,7 @@ fun markdownToHtmlLists(inputName: String, outputName: String) {
  *
  */
 fun markdownToHtml(inputName: String, outputName: String) {
-    TODO()
+
 }
 
 /**
