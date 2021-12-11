@@ -201,12 +201,14 @@ fun alignFileByWidth(inputName: String, outputName: String) {
     var writer = File(outputName).bufferedWriter()
     var maxLen = 0
     for (line in File(inputName).readLines()) {
-        var lstStr = line.split(Regex(""" +"""))
+        var strForHelp = "  " + line
+        var lstStr = strForHelp.split(Regex(""" +"""))
         maxLen = Math.max(maxLen, countLen(lstStr) + lstStr.size - 2)
     }
 
     for (line in File(inputName).readLines()) {
-        var lstStr = line.split(Regex(""" +"""))
+        var strForHelp = "  " + line
+        var lstStr = strForHelp.split(Regex(""" +"""))
         if ((!(line.isEmpty())) && (lstStr.size > 2)) {
             if (countLen(lstStr) + lstStr.size - 2 < maxLen) {
                 writer.write(lstStr[1])
