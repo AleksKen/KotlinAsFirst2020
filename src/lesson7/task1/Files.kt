@@ -682,66 +682,64 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
                 writer.write(" ")
             writer.write("0")
             break
-        } else {
-            if ((res.toString().toInt() < rhv) && (i == lhv.toString().lastIndex)) {
-                if (res.toString().toInt() != lhv) {
-                    for (j in 1..(countIndent))
-                        writer.write(" ")
-                    writer.write(res.toString())
-                    writer.newLine()
-                    for (j in 2..(countIndent + res.toString().lastIndex))
-                        writer.write(" ")
-                    writer.write("-0")
-                    writer.newLine()
-                    for (j in 1..(countIndent))
-                        writer.write(" ")
-                    for (j in 1..res.toString().length)
-                        writer.write("-")
-                    writer.newLine()
-                    for (j in 1..(countIndent + (res.toString().length - res.toString().toInt().toString().length)))
-                        writer.write(" ")
-                    writer.write(res.toString().toInt().toString())
-                    break
-                } else {
-
-                    for (j in 2..(countIndent))
-                        writer.write(" ")
-                    writer.write(res.toString())
-                    break
-                }
-            }
-
-            whatCanBeDivided.setLength(0)
-            whatCanBeDivided.append(res)
-            deduction = (Math.ceil((whatCanBeDivided.toString().toInt() / rhv).toDouble())) * rhv
-
-            for (j in 1..countIndent)
-                writer.write(" ")
-            writer.write(whatCanBeDivided.toString())
-            writer.newLine()
-
-            if (whatCanBeDivided.toString().length == deduction.toInt().toString().length) {
-                for (j in 2..countIndent)
+        } else if ((res.toString().toInt() < rhv) && (i == lhv.toString().lastIndex)) {
+            if (res.toString().toInt() != lhv) {
+                for (j in 1..(countIndent))
                     writer.write(" ")
-                writer.write("-" + deduction.toInt().toString())
+                writer.write(res.toString())
                 writer.newLine()
-                for (j in 2..countIndent)
+                for (j in 2..(countIndent + res.toString().lastIndex))
                     writer.write(" ")
-                for (j in 2..deduction.toString().length)
-                    writer.write("-")
+                writer.write("-0")
                 writer.newLine()
-            } else {
-                for (j in 1..countIndent + res.toString().length - deduction.toInt().toString().length - 1)
-                    writer.write(" ")
-                writer.write("-" + deduction.toInt().toString())
-                writer.newLine()
-                for (j in 1..countIndent)
+                for (j in 1..(countIndent))
                     writer.write(" ")
                 for (j in 1..res.toString().length)
                     writer.write("-")
                 writer.newLine()
+                for (j in 1..(countIndent + (res.toString().length - res.toString().toInt().toString().length)))
+                    writer.write(" ")
+                writer.write(res.toString().toInt().toString())
+                break
+            } else {
+                for (j in 2..(countIndent))
+                    writer.write(" ")
+                writer.write(res.toString())
+                break
             }
         }
+
+        whatCanBeDivided.setLength(0)
+        whatCanBeDivided.append(res)
+        deduction = (Math.ceil((whatCanBeDivided.toString().toInt() / rhv).toDouble())) * rhv
+
+        for (j in 1..countIndent)
+            writer.write(" ")
+        writer.write(whatCanBeDivided.toString())
+        writer.newLine()
+
+        if (whatCanBeDivided.toString().length == deduction.toInt().toString().length) {
+            for (j in 2..countIndent)
+                writer.write(" ")
+            writer.write("-" + deduction.toInt().toString())
+            writer.newLine()
+            for (j in 2..countIndent)
+                writer.write(" ")
+            for (j in 2..deduction.toString().length)
+                writer.write("-")
+            writer.newLine()
+        } else {
+            for (j in 1..countIndent + res.toString().length - deduction.toInt().toString().length - 1)
+                writer.write(" ")
+            writer.write("-" + deduction.toInt().toString())
+            writer.newLine()
+            for (j in 1..countIndent)
+                writer.write(" ")
+            for (j in 1..res.toString().length)
+                writer.write("-")
+            writer.newLine()
+        }
+
     }
     writer.close()
 }
