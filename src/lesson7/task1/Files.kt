@@ -209,7 +209,6 @@ fun alignFileByWidth(inputName: String, outputName: String) {
             lstStr.removeAt(lstStr.lastIndex)
         maxLen = Math.max(maxLen, countLen(lstStr) + lstStr.size - 2)
     }
-
     for (line in File(inputName).readLines()) {
         var strForHelp = "  " + line
         var listSplit = strForHelp.split(Regex(""" +"""))
@@ -249,6 +248,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
     }
     writer.close()
 }
+
 
 /**
  * Средняя (14 баллов)
@@ -385,98 +385,8 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
-    var steck = mutableListOf<String>("</html>", "</body>", "</p>")
-    var writer = File(outputName).bufferedWriter()
-    var ans = StringBuilder()
-    writer.write("<html>")
-    writer.newLine()
-    writer.write("<body>")
-    writer.newLine()
-    writer.write("<p>")
-    writer.newLine()
-    var flagB = 0
-    var flagI = 0
-    var flagS = 0
-    var flagBI = 0
-    for (line in File(inputName).readLines()) {
-        if (line.isEmpty())
-            writer.write("</p><p>")
-        for (i in 0..line.lastIndex) {
-            if ((i <= line.lastIndex - 2) && (line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI == 0)) {
-                if ((flagB == 0) && (flagI == 0)) {
-                    writer.write("<b><i>")
-                    steck.add("</b>")
-                    steck.add("</i>")
-                    flagBI += 1
-                    continue
-                }
-                if ((flagB != 0) && (flagI != 0)) {
-                    writer.write(steck[steck.lastIndex])
-                    writer.write(steck[steck.lastIndex - 1])
-                    steck.removeAt(steck.lastIndex)
-                    steck.removeAt(steck.lastIndex)
-                    flagB = 0
-                    flagI = 0
-                    continue
-                }
-            }
-
-            if ((i != 0) && (i <= line.lastIndex - 2) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB == 0)) {
-                writer.write("<b>")
-                steck.add("</b>")
-                flagB += 1
-                continue
-            }
-            if ((i != 0) && (i <= line.lastIndex - 1) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI == 0)) {
-                writer.write("<i>")
-                steck.add("</i>")
-                flagI += 1
-                continue
-            }
-            if ((i <= line.lastIndex - 1) && (line[i] == '~') && (line[i + 1] == '~') && (flagS == 0)) {
-                writer.write("<s>")
-                steck.add("</s>")
-                flagS += 1
-                continue
-            }
-            if ((i <= line.lastIndex - 2) && (line[i] == '*') && (line[i + 1] == '*') && (line[i + 2] == '*') && (flagBI != 0)) {
-                writer.write(steck[steck.lastIndex])
-                writer.write(steck[steck.lastIndex - 1])
-                steck.removeAt(steck.lastIndex)
-                steck.removeAt(steck.lastIndex)
-                flagBI = 0
-                continue
-            }
-            if ((i != 0) && (i <= line.lastIndex - 2) && (!(line[i - 1] == '*')) && (line[i] == '*') && (line[i + 1] == '*') && (!(line[i + 2] == '*')) && (flagB != 0)) {
-                writer.write(steck[steck.lastIndex])
-                steck.removeAt(steck.lastIndex)
-                flagB = 0
-                continue
-            }
-            if ((i != 0) && (i <= line.lastIndex - 1) && (!(line[i - 1] == '*')) && (line[i] == '*') && (!(line[i + 1] == '*')) && (flagI != 0)) {
-                writer.write(steck[steck.lastIndex])
-                steck.removeAt(steck.lastIndex)
-                flagI = 0
-                continue
-            }
-            if ((i <= line.lastIndex - 1) && (line[i] == '~') && (line[i + 1] == '~') && (flagS != 0)) {
-                writer.write(steck[steck.lastIndex])
-                steck.removeAt(steck.lastIndex)
-                flagS = 0
-                continue
-            }
-            if ((line[i] != '*') && (line[i] != '~'))
-                writer.write(line[i].toString())
-        }
-    }
-    writer.write("</p>")
-    writer.newLine()
-    writer.write("</body>")
-    writer.newLine()
-    writer.write("</html>")
-    writer.close()
+    TODO()
 }
-
 
 /**
  * Сложная (23 балла)
