@@ -212,8 +212,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
     for (line in File(inputName).readLines()) {
         var strForHelp = "  " + line
         var listSplit = strForHelp.split(Regex(""" +"""))
-        var lstStr = mutableListOf<String>()
-        lstStr = listSplit.toMutableList()
+        var lstStr = listSplit.toMutableList()
         if (lstStr[lstStr.lastIndex] == "")
             lstStr.removeAt(lstStr.lastIndex)
 
